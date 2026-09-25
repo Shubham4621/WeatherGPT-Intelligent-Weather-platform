@@ -1,0 +1,44 @@
+# WeatherGPT — Docker Compose
+# Phase 1: Backend only
+# Future phases will add: postgres, redis, frontend
+
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: weathergpt-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
+
+  # --- Future services (uncomment when needed) ---
+
+  # postgres:
+  #   image: postgis/postgis:16-3.4
+  #   container_name: weathergpt-db
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: weathergpt
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: weathergpt-redis
+  #   ports:
+  #     - "6379:6379"
+
+# volumes:
+#   pgdata:
