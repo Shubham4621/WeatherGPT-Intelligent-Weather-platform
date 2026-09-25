@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # WeatherGPT — AI-Powered Multilingual Weather Intelligence Platform
 
 > **Phase 1 — Backend Foundation**
@@ -350,3 +351,7 @@ npm run build
 ```
 
 Chat history is kept only in page memory and can be cleared. Current weather is the only supported data tool. There is no LangGraph, forecast, alerts, persistence, authentication, or other future-phase functionality in this release.
+=======
+# WeatherGPT-Intelligent-Weather-platform
+AI-powered conversational weather platform providing real-time weather, forecasts, alerts, climate insights, and location-based decision support through natural language.
+>>>>>>> b564e5608355f49e674299776f602fe9da06b647
