@@ -3,6 +3,21 @@ import type { AdvisoryActivity, ForecastResponse, WeatherAdvisory, WeatherRespon
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000').replace(/\/$/, '');
 const REQUEST_TIMEOUT_MS = 12_000;
 
+export interface HistoricalResponse {
+  status: 'available' | 'partial' | 'unavailable' | 'no_data'; location: string; source?: string | null;
+  retrieved_at?: string | null; period_start?: string | null; period_end?: string | null; reason?: string | null;
+  records?: Array<Record<string, unknown>>; summary?: Record<string, number | null>;
+}
+
+export async function getHistoricalWeather(city: string, start: string, end: string): Promise<HistoricalResponse> {
+  const params = new URLSearchParams({ city: city.trim(), start_date: start, end_date: end });
+  const response = await fetch(`${API_BASE_URL}/api/v1/weather/history?${params}`, { headers: { Accept: 'application/json' } });
+  const body = await response.json().catch(() => ({})) as HistoricalResponse & BackendError;
+  if (!response.ok) throw new WeatherApiError(body.detail ?? body.error ?? 'Unable to retrieve historical weather.', response.status);
+  if (!body || typeof body !== 'object' || typeof body.status !== 'string') throw new WeatherApiError('Historical service returned an unexpected response.');
+  return body;
+}
+
 interface BackendError {
   error?: string;
   detail?: string;

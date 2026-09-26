@@ -30,6 +30,8 @@ def _indic_question(message: str, language: str) -> tuple[str, str | None]:
     """Return an English routing phrase and explicit city for common supported queries."""
     text = message.casefold()
     city = next((canonical for token, canonical in _CITIES.items() if token.casefold() in text), None)
+    if any(term in text for term in ("à¤®à¤¾à¤—à¤šà¥à¤¯à¤¾", "à¤®à¤¾à¤—à¥€à¤²", "à¤ªà¤¿à¤›à¤²à¥‡", "à¤ªà¥à¤°à¤¾à¤¨à¤¾", "à¤‡à¤¤à¤¿à¤¹à¤¾à¤¸")):
+        return ("historical rainfall in " + city if city else "historical weather", city)
     travel = any(x in text for x in ("प्रवास", "यात्रा", "travel", "जाना चाहिए"))
     advisory = travel or any(x in text for x in ("छत्री", "छाता", "काळजी", "तैयारी", "बाहेर", "बाहर", "सावधानी", "व्यायाम"))
     alert = any(x in text for x in ("इशारा", "चेतावणी", "चेतावनी", "अलर्ट", "warning", "alert"))
@@ -146,6 +148,13 @@ def localize_chat_response(response: Any, language: str) -> Any:
     message = response.message
     if response.location is None and "which city or district" in message.casefold():
         return response.model_copy(update={"message": t["ask_city"]})
+    if intent == "HISTORICAL_WEATHER":
+        city = response.location or ""
+        if language == "mr":
+            message = f"{city} साठी ऐतिहासिक हवामान माहिती उपलब्ध नाही. विश्वसनीय ऐतिहासिक हवामान डेटा स्रोत कॉन्फिगर केलेला नाही, त्यामुळे ऐतिहासिक मोजमाप देता येत नाही."
+        else:
+            message = f"{city} के लिए ऐतिहासिक मौसम डेटा उपलब्ध नहीं है। विश्वसनीय ऐतिहासिक मौसम प्रदाता कॉन्फ़िगर नहीं है, इसलिए माप नहीं दिए जा सकते।"
+        return response.model_copy(update={"message": message})
     if intent == "CURRENT_WEATHER" and response.weather:
         w = response.weather
         # Pick a safe template by the exact numeric facts in the canonical response.

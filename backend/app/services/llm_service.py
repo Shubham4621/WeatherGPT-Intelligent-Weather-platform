@@ -184,6 +184,14 @@ class LLMService:
     async def classify(self, message: str, language: str = "en") -> ChatIntentResult:
         language = language.strip().lower()
         routing_message, indicative_city = _indic_question(message, language) if language != "en" else (message, None)
+        historical_terms = ("historical", "history", "last year", "last july", "historical average", "monthly rainfall", "temperature trend", "rainfall trend", "what was the", "in 20")
+        if language == "en" and any(term in message.casefold() for term in historical_terms):
+            route_city = re.search(r"\b(?:in|for|at)\s+([\w][\w .,'’-]{0,79}?)(?=\s+(?:last|this|during|from|in\s+20\d{2})\b|[?!.,;]|$)", message, re.IGNORECASE)
+            if route_city is None:
+                route_city = re.search(r"\bdid\s+([A-Z][\w .'-]{0,60}?)\s+(?:receive|have|record)", message, re.IGNORECASE)
+            return ChatIntentResult(intent=ChatIntent.HISTORICAL_WEATHER, city=route_city.group(1).strip() if route_city else None)
+        if language != "en" and any(term in message.casefold() for term in ("\u092e\u093e\u0917\u091a\u094d\u092f\u093e", "\u092e\u093e\u0917\u0940\u0932", "\u092a\u093f\u091b\u0932\u0947", "\u092a\u0941\u0930\u093e\u0928\u093e", "\u0907\u0924\u093f\u0939\u093e\u0938")):
+            return ChatIntentResult(intent=ChatIntent.HISTORICAL_WEATHER, city=indicative_city)
         if language != "en" and routing_message != message:
             lowered_route = routing_message.casefold()
             if "should i" in lowered_route or "precautions" in lowered_route:
@@ -235,7 +243,7 @@ class LLMService:
                 result = result.model_copy(update={"forecast_day_offset": 2})
             elif "tomorrow" in lowered:
                 result = result.model_copy(update={"forecast_day_offset": 1})
-        if result.intent in (ChatIntent.CURRENT_WEATHER, ChatIntent.FORECAST, ChatIntent.ALERT, ChatIntent.ADVISORY):
+        if result.intent in (ChatIntent.CURRENT_WEATHER, ChatIntent.FORECAST, ChatIntent.ALERT, ChatIntent.ADVISORY, ChatIntent.HISTORICAL_WEATHER):
             match = _EXPLICIT_CITY.search(routing_message)
             explicit_city = match.group(1).strip() if match else None
             model_city_is_explicit = bool(

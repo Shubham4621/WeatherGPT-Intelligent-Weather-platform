@@ -354,4 +354,13 @@ Chat history is kept only in page memory and can be cleared. Current weather is 
 =======
 # WeatherGPT-Intelligent-Weather-platform
 AI-powered conversational weather platform providing real-time weather, forecasts, alerts, climate insights, and location-based decision support through natural language.
+
+## Phase 8: Historical Weather
+
+Historical observations use an independent provider interface and the API
+`GET /api/v1/weather/history?city=Dhule&start_date=2025-07-01&end_date=2025-07-31`.
+No historical provider is configured, so requests explicitly return
+`status: unavailable`; forecast or current-weather data is never substituted.
+See [Phase 8 historical weather documentation](docs/phase8-historical-weather.md)
+for supported fields, aggregation and comparison rules, and provider limitations.
 >>>>>>> b564e5608355f49e674299776f602fe9da06b647

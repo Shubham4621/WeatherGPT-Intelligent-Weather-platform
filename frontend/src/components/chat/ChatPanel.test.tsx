@@ -98,4 +98,35 @@ describe('WeatherGPT chat UI', () => {
     expect(await screen.findByText(/WeatherGPT Advisory: Rain may affect your plans/)).toBeInTheDocument();
     expect(screen.getByText('WeatherGPT advisory')).toBeInTheDocument();
   });
+
+  it('puts a reviewed voice transcript in the normal input and sends one existing chat request', async () => {
+    const user = userEvent.setup();
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify(successfulChatResponse), { status: 200, headers: { 'Content-Type': 'application/json' } }),
+    );
+    let activeRecognition: MockRecognition;
+    class MockRecognition {
+      lang = ''; interimResults = false; continuous = false;
+      onstart: (() => void) | null = null;
+      onresult: typeof recognition.onresult = null;
+      onerror: typeof recognition.onerror = null;
+      onend: (() => void) | null = null;
+      constructor() { activeRecognition = this; }
+      start() { this.onstart?.(); }
+      stop() { this.onend?.(); }
+      abort() {}
+    }
+    Object.defineProperty(window, 'SpeechRecognition', { configurable: true, value: MockRecognition });
+    await openChat(user);
+    await user.click(screen.getByRole('button', { name: 'Start voice input' }));
+    // The fake browser recognition instance is the latest instance created by the microphone control.
+    const results = Object.assign([{ transcript: 'What is the humidity in Dhule?' }], { isFinal: true });
+    activeRecognition.onresult?.({ resultIndex: 0, results: [results] });
+    const input = screen.getByRole('textbox', { name: /ask WeatherGPT/i });
+    await waitFor(() => expect(input).toHaveValue('What is the humidity in Dhule?'));
+    await user.click(screen.getByRole('button', { name: 'Send message' }));
+    expect(await screen.findByText(successfulChatResponse.message)).toBeInTheDocument();
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(String(fetchSpy.mock.calls[0][1]?.body)).message).toBe('What is the humidity in Dhule?');
+  });
 });

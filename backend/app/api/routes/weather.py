@@ -1,5 +1,6 @@
 """Weather API endpoints."""
 
+from datetime import date
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 
@@ -11,12 +12,35 @@ from app.services.imd_alert_service import AlertProviderUnavailable, ImdAlertSer
 from app.schemas.weather import WeatherAlertsResponse, WeatherAdvisoryResponse
 from app.schemas.chat import AdvisoryActivity
 from app.tools.weather_tools import get_weather_advisory
+from app.services.historical_weather_service import HistoricalWeatherService, aggregate, monthly_aggregation, yearly_aggregation
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/weather", tags=["Weather"])
 
 weather_service = WeatherService()
 imd_alert_service = ImdAlertService()
+historical_weather_service = HistoricalWeatherService()
+
+
+@router.get("/history")
+async def get_historical_weather(
+    city: str = Query(..., min_length=1, max_length=100),
+    start_date: date = Query(...),
+    end_date: date = Query(...),
+):
+    """Historical observations are sourced separately from current and forecast data."""
+    if not city.strip():
+        raise WeatherAPIError(detail="Unsupported location", status_code=422)
+    try:
+        result = await historical_weather_service.get_history(city, start_date, end_date)
+    except ValueError as exc:
+        raise WeatherAPIError(detail=f"Invalid date range: {exc}", status_code=422) from exc
+    payload = result.model_dump(mode="json")
+    if result.status in {"available", "partial"}:
+        payload["summary"] = aggregate(result.records)
+        payload["monthly"] = monthly_aggregation(result.records)
+        payload["yearly"] = yearly_aggregation(result.records)
+    return payload
 
 
 @router.get("/current", response_model=CurrentWeatherResponse)

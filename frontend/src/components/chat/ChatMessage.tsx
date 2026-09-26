@@ -1,5 +1,6 @@
 import { CloudSun, UserRound } from 'lucide-react';
 import type { ChatMessageRecord } from '../../types/chat';
+import VoiceOutput from '../voice/VoiceOutput';
 
 interface ChatMessageProps {
   message: ChatMessageRecord;
@@ -27,6 +28,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             {message.response.observed_at && <><span aria-hidden="true">·</span><time dateTime={message.response.observed_at}>Observed {formatTime(message.response.observed_at)}</time></>}
           </div>
         )}
+        {!isUser && <VoiceOutput text={message.content} />}
       </div>
     </article>
   );

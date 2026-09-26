@@ -65,7 +65,7 @@ function isChatResponse(value: unknown): value is ChatResponse {
       && typeof weather.description === 'string',
   );
   return typeof response.message === 'string'
-    && (response.intent === 'CURRENT_WEATHER' || response.intent === 'FORECAST' || response.intent === 'ALERT' || response.intent === 'ADVISORY' || response.intent === 'UNKNOWN')
+    && (response.intent === 'CURRENT_WEATHER' || response.intent === 'FORECAST' || response.intent === 'ALERT' || response.intent === 'ADVISORY' || response.intent === 'HISTORICAL_WEATHER' || response.intent === 'UNKNOWN')
     && (response.location === null || typeof response.location === 'string')
     && (response.source === null || typeof response.source === 'string')
     && (response.tool_used === null || typeof response.tool_used === 'string')

@@ -106,6 +106,13 @@ class WeatherAgent:
                 message = f"{label} in {result.location.name}, temperatures are expected to range from approximately {day.temperature_min:.1f}?C to {day.temperature_max:.1f}?C. The forecast indicates {day.description}{chance}."
             return localize_chat_response(ChatResponse(message=message, intent=ChatIntent.FORECAST, location=result.location.name, source=result.source, tool_used="get_forecast", forecast=[item.model_dump(mode="json") for item in selected]), language)
 
+        if intent.intent == ChatIntent.HISTORICAL_WEATHER:
+            return localize_chat_response(ChatResponse(
+                message="Historical data unavailable. A reliable historical weather provider is not configured, so I cannot provide historical measurements.",
+                intent=ChatIntent.HISTORICAL_WEATHER, location=intent.city,
+                tool_used="get_historical_weather",
+            ), language)
+
         observation = await self.weather_tool(intent.city)
         return localize_chat_response(self._grounded_response(intent, observation), language)
 

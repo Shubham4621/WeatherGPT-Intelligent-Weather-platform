@@ -1,6 +1,6 @@
 import type { CurrentWeather } from './weather';
 
-export type ChatIntent = 'CURRENT_WEATHER' | 'FORECAST' | 'ALERT' | 'ADVISORY' | 'UNKNOWN';
+export type ChatIntent = 'CURRENT_WEATHER' | 'FORECAST' | 'ALERT' | 'ADVISORY' | 'HISTORICAL_WEATHER' | 'UNKNOWN';
 
 export interface ChatResponse {
   message: string;

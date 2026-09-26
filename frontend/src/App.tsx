@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Forecast from './pages/Forecast';
 import Alerts from './pages/Alerts';
 import Advisory from './pages/Advisory';
+import Historical from './pages/Historical';
 import { LanguageContext, readLanguage, type Language } from './i18n';
 
 export default function App() {
@@ -14,7 +15,7 @@ export default function App() {
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}><div lang={language} className="min-h-screen bg-canvas text-ink">
       <AppHeader page={page} onNavigate={setPage} />
-      {page === 'dashboard' ? <Dashboard onOpenChat={() => setPage('chat')} onOpenAlerts={() => setPage('alerts')} /> : page === 'chat' ? <ChatPanel /> : page === 'alerts' ? <Alerts /> : page === 'advisory' ? <Advisory /> : <Forecast />}
+      {page === 'dashboard' ? <Dashboard onOpenChat={() => setPage('chat')} onOpenAlerts={() => setPage('alerts')} /> : page === 'chat' ? <ChatPanel /> : page === 'alerts' ? <Alerts /> : page === 'advisory' ? <Advisory /> : page === 'historical' ? <Historical /> : <Forecast />}
     </div></LanguageContext.Provider>
   );
 }
