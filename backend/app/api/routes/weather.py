@@ -12,14 +12,15 @@ from app.services.imd_alert_service import AlertProviderUnavailable, ImdAlertSer
 from app.schemas.weather import WeatherAlertsResponse, WeatherAdvisoryResponse
 from app.schemas.chat import AdvisoryActivity
 from app.tools.weather_tools import get_weather_advisory
-from app.services.historical_weather_service import HistoricalWeatherService, aggregate, monthly_aggregation, yearly_aggregation
+from app.services.historical_weather_service import HistoricalWeatherService, LocalImdGridHistoricalProvider, aggregate, monthly_aggregation, yearly_aggregation
+from app.schemas.rainfall_prediction import RainfallPredictionResponse
 
 logger = get_logger(__name__)
 router = APIRouter(prefix="/weather", tags=["Weather"])
 
 weather_service = WeatherService()
 imd_alert_service = ImdAlertService()
-historical_weather_service = HistoricalWeatherService()
+historical_weather_service = HistoricalWeatherService(LocalImdGridHistoricalProvider())
 
 
 @router.get("/history")
@@ -113,3 +114,20 @@ async def get_advisory(
     activity: AdvisoryActivity = Query(default=AdvisoryActivity.GENERAL_PRECAUTION),
 ):
     return await get_weather_advisory(city, day_offset, activity)
+
+
+@router.get("/rainfall-prediction", response_model=RainfallPredictionResponse)
+async def get_rainfall_prediction(
+    lat: float = Query(..., ge=-90, le=90, description="Latitude in decimal degrees"),
+    lon: float = Query(..., ge=-180, le=180, description="Longitude in decimal degrees"),
+    horizon: int = Query(default=1, ge=1, le=1, description="Prediction horizon in days; currently 1"),
+):
+    """Return a one-day WeatherGPT model estimate from the local validated IMD archive."""
+    from app.services.rainfall_prediction import predict_next_day
+
+    try:
+        return predict_next_day(lat, lon, horizon)
+    except FileNotFoundError as exc:
+        raise WeatherAPIError(detail="Historical rainfall prediction model or validated data is unavailable.", status_code=503) from exc
+    except ValueError as exc:
+        raise WeatherAPIError(detail=f"Rainfall prediction unavailable: {exc}", status_code=422) from exc

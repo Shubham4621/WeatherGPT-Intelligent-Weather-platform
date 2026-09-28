@@ -20,26 +20,26 @@ export default function CurrentWeatherCard({ data }: CurrentWeatherCardProps) {
 
   return (
     <section aria-labelledby="current-weather-heading" className="space-y-5" aria-live="polite">
-      <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#153a70] via-[#1e5bab] to-[#367ed5] p-6 text-white shadow-card sm:p-9">
+      <div className="weather-hero overflow-hidden rounded-3xl border border-line p-6 shadow-card sm:p-9">
         <div className="flex flex-col justify-between gap-7 sm:flex-row sm:items-start">
           <div>
-            <p className="flex items-center gap-2 text-sm font-medium text-blue-100"><span className="h-2 w-2 rounded-full bg-emerald-300" /> {t(language, 'Current conditions')}</p>
-            <h2 id="current-weather-heading" className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
-              {location.name}<span className="ml-2 text-blue-200">{location.country}</span>
+            <p className="flex items-center gap-2 text-sm font-semibold text-brand"><span className="h-2 w-2 rounded-full bg-emerald-500" /> LIVE WEATHER · {t(language, 'Current conditions')}</p>
+            <h2 id="current-weather-heading" className="mt-4 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              {location.name}<span className="ml-2 text-muted">{location.country}</span>
             </h2>
-            <p className="mt-1 text-sm text-blue-100">
+            <p className="mt-1 text-sm text-muted">
               {Math.abs(location.latitude).toFixed(2)}° {location.latitude < 0 ? 'S' : 'N'}, {Math.abs(location.longitude).toFixed(2)}° {location.longitude < 0 ? 'W' : 'E'}
             </p>
-            <p className="mt-6 max-w-xl text-base capitalize text-blue-50">{conditionLabel(language, weather.description)}</p>
-            <p className="mt-2 text-sm text-blue-200">{t(language, 'Feels like')} {weather.feels_like.toFixed(1)}°</p>
+            <p className="mt-6 max-w-xl text-base font-medium capitalize text-ink">{conditionLabel(language, weather.description)}</p>
+            <p className="mt-2 text-sm text-muted">{t(language, 'Feels like')} {weather.feels_like.toFixed(1)}°</p>
           </div>
           <div className="flex items-center gap-4 sm:flex-col sm:items-end sm:gap-0">
             {iconUrl ? <img src={iconUrl} alt="" className="h-20 w-20 object-contain sm:h-24 sm:w-24" /> : <CloudSun aria-hidden="true" className="h-16 w-16 text-amber-200 sm:h-20 sm:w-20" strokeWidth={1.3} />}
-            <p className="text-6xl font-light tracking-tighter sm:text-7xl">{Math.round(weather.temperature)}<span className="align-top text-3xl">°</span></p>
-            <p className="mt-1 text-sm text-blue-100">H {Math.round(weather.temp_max)}° <span className="mx-1 text-blue-300">/</span> L {Math.round(weather.temp_min)}°</p>
+            <p className="text-6xl font-light tracking-tighter text-brand sm:text-7xl">{Math.round(weather.temperature)}<span className="align-top text-3xl">°</span></p>
+            <p className="mt-1 text-sm text-muted">H {Math.round(weather.temp_max)}° <span className="mx-1 text-slate-400">/</span> L {Math.round(weather.temp_min)}°</p>
           </div>
         </div>
-        <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-white/20 pt-4 text-xs text-blue-100">
+        <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 text-xs text-muted">
           <span>{t(language, 'Observed')} {new Intl.DateTimeFormat(localeFor(language), { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(data.observed_at))}</span>
           <span>{t(language, 'Source')}: {data.source}</span>
         </div>
@@ -56,6 +56,12 @@ export default function CurrentWeatherCard({ data }: CurrentWeatherCardProps) {
           <MetricCard label={t(language, 'Cloud cover')} value={weather.cloudiness == null ? '—' : String(weather.cloudiness)} unit={weather.cloudiness == null ? '' : '%'} icon={Cloud} detail={t(language, 'Sky coverage')} />
         </div>
       </div>
+
+      <section aria-label="Sun times and data availability" className="grid gap-3 sm:grid-cols-3">
+        <div className="rounded-2xl border border-line bg-white p-4 shadow-sm"><p className="text-xs font-medium text-muted">{t(language, 'Sunrise')}</p><p className="mt-1 text-sm font-semibold text-ink">{new Intl.DateTimeFormat(localeFor(language), { timeStyle: 'short' }).format(new Date(data.sun.sunrise))}</p></div>
+        <div className="rounded-2xl border border-line bg-white p-4 shadow-sm"><p className="text-xs font-medium text-muted">{t(language, 'Sunset')}</p><p className="mt-1 text-sm font-semibold text-ink">{new Intl.DateTimeFormat(localeFor(language), { timeStyle: 'short' }).format(new Date(data.sun.sunset))}</p></div>
+        <div className="rounded-2xl border border-dashed border-line bg-white/60 p-4"><p className="text-xs font-medium text-muted">{t(language, 'Rain probability')}</p><p className="mt-1 text-sm font-semibold text-muted">{t(language, 'Rain probability unavailable')}</p></div>
+      </section>
     </section>
   );
 }

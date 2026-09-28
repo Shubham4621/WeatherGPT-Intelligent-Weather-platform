@@ -5,15 +5,15 @@ import ChatMessage from './ChatMessage';
 import TypingIndicator from './TypingIndicator';
 import { ChatApiError, sendChatMessage } from '../../services/chatApi';
 import type { ChatMessageRecord } from '../../types/chat';
-import { t, useLanguage } from '../../i18n';
+import { LANGUAGE_LABELS, t, useLanguage } from '../../i18n';
 
 const SUGGESTIONS = [
-  "What's the weather in Dhule?",
+  "What's the weather today in Dhule?",
   'Will it rain tomorrow in Dhule?',
-  'Should I carry an umbrella tomorrow in Dhule?',
-  'How hot is it in Nashik?',
-  "What's the humidity in Mumbai?",
-  'Tell me the current weather in Pune.',
+  "Show this week's forecast in Dhule",
+  'Any weather warnings in Dhule?',
+  'Is it safe to travel tomorrow in Dhule?',
+  'Give me farming advice for Dhule tomorrow.',
 ];
 
 export default function ChatPanel() {
@@ -58,7 +58,7 @@ export default function ChatPanel() {
       <section aria-label="WeatherGPT conversation" className="flex min-h-[60vh] flex-1 flex-col overflow-hidden rounded-3xl border border-line bg-slate-50/70 shadow-card">
         <div className="flex items-center gap-3 border-b border-line bg-white px-5 py-4 sm:px-6">
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-white"><CloudSun size={21} aria-hidden="true" /></span>
-          <div><p className="font-semibold text-ink">{t(language, 'WeatherGPT assistant')}</p><p className="text-xs text-muted">{t(language, 'Grounded in current provider data')} · {language === 'mr' ? 'मराठी' : language === 'hi' ? 'हिन्दी' : 'English'}</p></div>
+          <div><p className="font-semibold text-ink">{t(language, 'WeatherGPT assistant')}</p><p className="text-xs text-muted">{t(language, 'Grounded in current provider data')} · {LANGUAGE_LABELS[language]}</p></div>
           {messages.length > 0 && <button type="button" onClick={() => { setMessages([]); setError(null); }} disabled={loading} className="ml-auto rounded-lg px-3 py-2 text-xs font-medium text-muted hover:bg-slate-100 hover:text-ink disabled:opacity-50">Clear chat</button>}
         </div>
 

@@ -35,6 +35,13 @@ def test_service_filters_period_and_marks_partial_coverage():
     assert result.period_start == date(2025, 7, 1)
 
 
+def test_service_marks_provider_data_outside_requested_range_as_no_weather_data():
+    result = asyncio.run(HistoricalWeatherService(FixtureProvider()).get_history("Dhule", date(2025, 8, 1), date(2025, 8, 2)))
+    assert result.status == "no_data"
+    assert result.availability_status == "NO_WEATHER_DATA"
+    assert result.records == []
+
+
 def test_reversed_dates_rejected():
     with pytest.raises(ValueError):
         asyncio.run(HistoricalWeatherService().get_history("Dhule", date(2025, 8, 1), date(2025, 7, 1)))
@@ -100,7 +107,8 @@ def test_empty_aggregation_is_not_zero_rainfall():
 async def test_history_api_returns_controlled_unavailable(client):
     response = await client.get("/api/v1/weather/history", params={"city": "Dhule", "start_date": "2025-07-01", "end_date": "2025-07-31"})
     assert response.status_code == 200
-    assert response.json()["status"] == "unavailable"
+    assert response.json()["status"] == "data_not_available"
+    assert response.json()["availability_status"] == "DATA_NOT_AVAILABLE"
     assert response.json()["records"] == []
 
 

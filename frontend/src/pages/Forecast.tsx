@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { AlertCircle, CloudSun, Droplets, Wind } from 'lucide-react';
+import { AlertCircle, Cloud, CloudRain, CloudSun, Droplets, Wind, Sun } from 'lucide-react';
 import { getForecast, WeatherApiError } from '../services/weatherApi';
 import type { ForecastResponse } from '../types/weather';
 import { conditionLabel, localeFor, t, useLanguage } from '../i18n';
 
 export function ForecastCard({ date, low, high, description, humidity, wind, rain }: { date: string; low: number; high: number; description: string; humidity: number | null; wind: number | null; rain: number | null }) {
   const { language } = useLanguage();
-  return <article className="rounded-2xl border border-line bg-white p-5 shadow-card"><p className="text-sm font-semibold text-muted">{new Date(date).toLocaleDateString(localeFor(language), { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'UTC' })}</p><CloudSun className="my-4 text-brand" size={28} /><p className="text-sm capitalize text-ink">{conditionLabel(language, description)}</p><p className="mt-3 text-2xl font-semibold">{Math.round(high)}° <span className="text-base font-normal text-muted">/ {Math.round(low)}°C</span></p><div className="mt-4 space-y-2 text-xs text-muted">{humidity !== null && <p><Droplets className="mr-1 inline" size={13} />{t(language, 'Humidity')} {humidity}%</p>}{wind !== null && <p><Wind className="mr-1 inline" size={13} />{t(language, 'Wind')} {wind} m/s</p>}{rain !== null && <p>{t(language, 'Rain probability')} {Math.round(rain)}%</p>}</div></article>;
+  const normalized = description.toLowerCase();
+  const Icon = normalized.includes('rain') || normalized.includes('drizzle') || normalized.includes('thunder') ? CloudRain : normalized.includes('clear') ? Sun : normalized.includes('cloud') ? CloudSun : Cloud;
+  return <article className="rounded-2xl border border-line bg-white p-5 shadow-card"><p className="text-sm font-semibold text-muted">{new Date(date).toLocaleDateString(localeFor(language), { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'UTC' })}</p><Icon className="my-4 text-brand" size={28} aria-hidden="true"/><p className="text-sm capitalize text-ink">{conditionLabel(language, description)}</p><p className="mt-3 text-2xl font-semibold">{Math.round(high)}° <span className="text-base font-normal text-muted">/ {Math.round(low)}°C</span></p><div className="mt-4 space-y-2 text-xs text-muted">{humidity !== null && <p><Droplets className="mr-1 inline" size={13} />{t(language, 'Humidity')} {humidity}%</p>}{wind !== null && <p><Wind className="mr-1 inline" size={13} />{t(language, 'Wind')} {wind} m/s</p>}{rain !== null && <p>{t(language, 'Rain probability')} {Math.round(rain)}%</p>}</div></article>;
 }
 
 export default function Forecast() {

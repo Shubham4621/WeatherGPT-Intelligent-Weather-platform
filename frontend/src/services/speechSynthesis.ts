@@ -11,6 +11,8 @@ export interface SynthesisPort {
 }
 export type UtteranceFactory = (text: string) => SpeechUtterancePort;
 
+let activeSpeech: { token: object; cancel: () => void } | null = null;
+
 export function preferredVoice(voices: VoiceOption[], language: Language): { voice: VoiceOption | null; fallback: boolean } {
   const locale = recognitionLocale(language).toLowerCase();
   const prefix = locale.split('-')[0];
@@ -23,14 +25,16 @@ export function preferredVoice(voices: VoiceOption[], language: Language): { voi
 }
 
 export class SpeechSynthesisService {
+  private activeToken: object | null = null;
   constructor(
     private readonly synthesis: SynthesisPort | null = typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis as unknown as SynthesisPort : null,
     private readonly makeUtterance?: UtteranceFactory,
   ) {}
 
-  speak(text: string, language: Language, callbacks: { start?: () => void; end?: () => void; error?: () => void } = {}): { ok: boolean; fallback: boolean } {
+  speak(text: string, language: Language, callbacks: { start?: () => void; end?: () => void; error?: () => void; cancelled?: () => void } = {}): { ok: boolean; fallback: boolean } {
     if (!this.synthesis || (!this.makeUtterance && typeof SpeechSynthesisUtterance === 'undefined') || !text.trim()) return { ok: false, fallback: false };
-    this.stop();
+    activeSpeech?.cancel();
+    const token = {};
     try {
       const utterance = this.makeUtterance
         ? this.makeUtterance(text.trim())
@@ -40,16 +44,35 @@ export class SpeechSynthesisService {
       utterance.voice = selected.voice;
       utterance.rate = 1;
       utterance.onstart = callbacks.start ?? null;
-      utterance.onend = callbacks.end ?? null;
-      utterance.onerror = callbacks.error ?? null;
+      const finish = (callback?: () => void) => {
+        if (activeSpeech?.token === token) activeSpeech = null;
+        if (this.activeToken === token) this.activeToken = null;
+        callback?.();
+      };
+      utterance.onend = () => finish(callbacks.end);
+      utterance.onerror = () => finish(callbacks.error);
+      this.activeToken = token;
+      activeSpeech = {
+        token,
+        cancel: () => {
+          try { this.synthesis?.cancel(); } catch { /* Keep the chat usable if browser playback fails. */ }
+          finish(callbacks.cancelled);
+        },
+      };
       this.synthesis.speak(utterance);
       return { ok: true, fallback: selected.fallback };
     } catch {
+      if (activeSpeech?.token === token) activeSpeech = null;
+      if (this.activeToken === token) this.activeToken = null;
+      callbacks.error?.();
       return { ok: false, fallback: false };
     }
   }
 
   stop(): void {
-    try { this.synthesis?.cancel(); } catch { /* Keep the chat usable if browser playback fails. */ }
+    if (activeSpeech?.token === this.activeToken) {
+      activeSpeech.cancel();
+      activeSpeech = null;
+    }
   }
 }

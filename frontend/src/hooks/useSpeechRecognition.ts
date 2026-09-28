@@ -5,6 +5,15 @@ import { SpeechRecognitionService, type RecognitionPort } from '../services/spee
 export type RecognitionStatus = 'idle' | 'requesting' | 'listening' | 'processing' | 'ready' | 'error';
 export type RecognitionError = 'unsupported' | 'permission' | 'no_speech' | 'recognition';
 
+function discardRecognition(recognition: RecognitionPort | null) {
+  if (!recognition) return;
+  recognition.onstart = null;
+  recognition.onresult = null;
+  recognition.onerror = null;
+  recognition.onend = null;
+  try { recognition.abort(); } catch { /* The browser may already have stopped the session. */ }
+}
+
 export function useSpeechRecognition(language: Language, service = new SpeechRecognitionService()) {
   const [status, setStatus] = useState<RecognitionStatus>('idle');
   const [transcript, setTranscript] = useState('');
@@ -15,7 +24,7 @@ export function useSpeechRecognition(language: Language, service = new SpeechRec
   const errorRef = useRef(false);
 
   const cancel = useCallback(() => {
-    recognitionRef.current?.abort();
+    discardRecognition(recognitionRef.current);
     recognitionRef.current = null;
     finalRef.current = '';
     errorRef.current = false;
@@ -23,7 +32,7 @@ export function useSpeechRecognition(language: Language, service = new SpeechRec
   }, []);
 
   const start = useCallback(() => {
-    recognitionRef.current?.abort();
+    discardRecognition(recognitionRef.current);
     finalRef.current = ''; errorRef.current = false;
     setTranscript(''); setInterimTranscript(''); setError(null); setStatus('requesting');
     const recognition = service.createSession(language);
@@ -63,6 +72,6 @@ export function useSpeechRecognition(language: Language, service = new SpeechRec
     try { recognitionRef.current.stop(); } catch { setError('recognition'); setStatus('error'); recognitionRef.current = null; }
   }, []);
 
-  useEffect(() => () => { recognitionRef.current?.abort(); }, []);
+  useEffect(() => () => { discardRecognition(recognitionRef.current); recognitionRef.current = null; }, []);
   return { status, transcript, interimTranscript, error, start, stop, cancel };
 }

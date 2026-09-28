@@ -57,6 +57,17 @@ describe('browser speech adapters', () => {
     expect(unsupported.result.current.error).toBe('unsupported');
   });
 
+  it('removes recognition callbacks and aborts when the input unmounts', () => {
+    const recognition = fakeRecognition();
+    const { result, unmount } = renderHook(() => useSpeechRecognition('en', new SpeechRecognitionService(() => recognition)));
+    act(() => result.current.start());
+    expect(recognition.onresult).toBeTypeOf('function');
+    unmount();
+    expect(recognition.abort).toHaveBeenCalledOnce();
+    expect(recognition.onresult).toBeNull();
+    expect(recognition.onend).toBeNull();
+  });
+
   it('chooses requested-language voice and reports fallback', () => {
     const voices = [{ lang: 'en-US', name: 'English' }, { lang: 'hi-IN', name: 'Hindi' }];
     expect(preferredVoice(voices, 'hi').fallback).toBe(false);
@@ -75,13 +86,28 @@ describe('browser speech adapters', () => {
     });
     expect(service.speak('Dhule weather', 'en')).toMatchObject({ ok: true, fallback: false });
     expect(service.speak('Rain tomorrow', 'hi')).toMatchObject({ ok: true, fallback: true });
-    expect(synthesis.cancel).toHaveBeenCalledTimes(2);
+    expect(synthesis.cancel).toHaveBeenCalledOnce();
     expect(synthesis.speak).toHaveBeenCalledTimes(2);
+    utterances[0].onend?.(); // A late event from replaced speech must not clear the new playback owner.
     service.stop();
-    expect(synthesis.cancel).toHaveBeenCalledTimes(3);
+    expect(synthesis.cancel).toHaveBeenCalledTimes(2);
     expect(utterances[1].lang).toBe('hi-IN');
 
     expect(new SpeechSynthesisService(null, () => ({} as SpeechUtterancePort)).speak('Answer', 'en').ok).toBe(false);
     expect(service.speak('  ', 'en').ok).toBe(false);
+  });
+
+  it('notifies the previous speaker when a different response replaces its playback', () => {
+    const synthesis = { speaking: false, cancel: vi.fn(), speak: vi.fn(), getVoices: () => [{ lang: 'en-IN', name: 'English' }] } as unknown as SynthesisPort;
+    const first = new SpeechSynthesisService(synthesis, () => ({ lang: '', voice: null, rate: 1, onstart: null, onend: null, onerror: null }));
+    const second = new SpeechSynthesisService(synthesis, () => ({ lang: '', voice: null, rate: 1, onstart: null, onend: null, onerror: null }));
+    const cancelled = vi.fn();
+    first.speak('First response', 'en', { cancelled });
+    second.speak('Second response', 'en');
+    expect(cancelled).toHaveBeenCalledOnce();
+    first.stop(); // A stale control must not stop playback owned by the second control.
+    expect(synthesis.cancel).toHaveBeenCalledOnce();
+    second.stop();
+    expect(synthesis.cancel).toHaveBeenCalledTimes(2);
   });
 });

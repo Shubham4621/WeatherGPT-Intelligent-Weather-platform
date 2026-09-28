@@ -3,6 +3,7 @@ from calendar import month_name
 from datetime import date, datetime, timezone
 from statistics import mean
 from typing import Protocol
+from pathlib import Path
 
 from pydantic import BaseModel, Field
 
@@ -23,6 +24,7 @@ class HistoricalWeatherRecord(BaseModel):
 
 class HistoricalDataset(BaseModel):
     status: str
+    availability_status: str | None = None
     location: str
     source: str | None = None
     retrieved_at: datetime | None = None
@@ -30,6 +32,7 @@ class HistoricalDataset(BaseModel):
     period_end: date | None = None
     records: list[HistoricalWeatherRecord] = Field(default_factory=list)
     reason: str | None = None
+    metadata: dict = Field(default_factory=dict)
 
 
 class HistoricalWeatherProvider(Protocol):
@@ -38,7 +41,51 @@ class HistoricalWeatherProvider(Protocol):
 
 class UnconfiguredHistoricalProvider:
     async def fetch(self, city: str, start_date: date, end_date: date) -> HistoricalDataset:
-        return HistoricalDataset(status="unavailable", location=city, reason="Historical weather provider is not configured")
+        return HistoricalDataset(status="unavailable", availability_status="NO_HISTORICAL_DATA_CONFIGURED", location=city, reason="Historical weather provider is not configured")
+
+
+class LocalImdGridHistoricalProvider:
+    """Reads a normalized local file only; it never downloads or synthesizes records."""
+    def __init__(self, path: str | Path | None = None):
+        self.path = Path(path) if path else Path(__file__).resolve().parents[3] / "data" / "processed" / "dhule_historical.csv"
+
+    async def fetch(self, city: str, start_date: date, end_date: date) -> HistoricalDataset:
+        if city.strip().casefold() not in {"dhule", "dhule, maharashtra", "dhule, india"}:
+            return HistoricalDataset(status="no_data", availability_status="NO_WEATHER_DATA", location=city,
+                reason="The installed IMD grid extract is configured for Dhule only.")
+        if not self.path.is_file():
+            return HistoricalDataset(status="data_not_available", availability_status="DATA_NOT_AVAILABLE", location=city,
+                source="India Meteorological Department (IMD Pune)", reason="IMD dataset metadata is configured, but no normalized historical data file is installed.",
+                metadata={"expected_file": "data/processed/dhule_historical.csv", "reference": "IMD Pune gridded archives",
+                    "period": "1901–2024 rainfall; 1951–2024 Tmax/Tmin", "resolution": "0.25° rainfall; 1° Tmax/Tmin",
+                    "variables": "rainfall_mm, temp_max_c, temp_min_c"})
+        try:
+            from app.services.historical_data import read_normalized_csv, validate_records
+            rows = read_normalized_csv(self.path)
+        except (OSError, ValueError, TypeError) as exc:
+            return HistoricalDataset(status="unavailable", availability_status="DATA_INVALID", location=city,
+                reason=f"Installed historical data could not be validated: {type(exc).__name__}")
+        if not rows:
+            return HistoricalDataset(status="unavailable", availability_status="DATA_INVALID", location=city,
+                reason="Installed historical data file contains no records.")
+        selected = [row for row in rows if start_date <= row.date <= end_date]
+        if not selected:
+            return HistoricalDataset(status="no_data", availability_status="NO_WEATHER_DATA", location=city,
+                source="India Meteorological Department (IMD Pune)", reason="No installed historical records cover the requested period.")
+        report = validate_records(rows)
+        if report.status == "FAIL":
+            return HistoricalDataset(status="unavailable", availability_status="DATA_INVALID", location=city,
+                source=selected[0].source, reason="Installed historical data failed validation; no records were returned.",
+                metadata={"validation_status": report.status, "invalid_values": report.invalid_values})
+        records = [HistoricalWeatherRecord(location=city, date=row.date, temperature_min=row.temp_min_c,
+            temperature_max=row.temp_max_c, temperature_mean=None,
+            rainfall=row.rainfall_mm, source=row.source, retrieved_at=datetime.now(timezone.utc)) for row in selected]
+        return HistoricalDataset(status="available", availability_status="DATA_AVAILABLE", location=city,
+            source=selected[0].source, period_start=min(r.date for r in records), period_end=max(r.date for r in records),
+            records=records, metadata={"dataset": selected[0].dataset, "grid_resolution": selected[0].grid_resolution,
+                "latitude": selected[0].latitude, "longitude": selected[0].longitude,
+                "validation_status": report.status, "missing_rainfall": report.missing_rainfall,
+                "missing_tmax": report.missing_tmax, "missing_tmin": report.missing_tmin})
 
 
 def validate_range(start_date: date, end_date: date) -> None:
@@ -128,11 +175,16 @@ class HistoricalWeatherService:
         if data.status == "available":
             data.records = [r for r in data.records if start_date <= r.date <= end_date]
             data.records.sort(key=lambda r: r.date)
-            if data.records:
+            if not data.records:
+                data.status = "no_data"
+                data.availability_status = "NO_WEATHER_DATA"
+                data.reason = "No historical data available for the requested period."
+            else:
                 data.retrieved_at = data.retrieved_at or datetime.now(timezone.utc)
                 data.period_start = data.records[0].date
                 data.period_end = data.records[-1].date
                 expected_days = (end_date - start_date).days + 1
                 if len(data.records) < expected_days:
                     data.status = "partial"
+                    data.availability_status = "DATA_AVAILABLE"
         return data

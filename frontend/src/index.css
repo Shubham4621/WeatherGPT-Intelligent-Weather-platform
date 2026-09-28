@@ -3,18 +3,72 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: light;
+  --color-ink: #17263c;
+  --color-muted: #718096;
+  --color-canvas: #f4f7fb;
+  --color-line: #e5ebf2;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #17263c;
-  background: #f4f7fb;
+  color: var(--color-ink);
+  background: var(--color-canvas);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.dark {
+  color-scheme: dark;
+  --color-ink: #e7edf6;
+  --color-muted: #a1aec1;
+  --color-canvas: #101722;
+  --color-line: #273446;
+  background: var(--color-canvas);
+}
+
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 button, input { font: inherit; }
+button, a, select, input { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid #2767d7; outline-offset: 2px; }
+
+.app-topbar { color: var(--color-ink); }
+.weather-hero { background: linear-gradient(140deg, #ffffff 5%, #f4f9ff 62%, #eaf4ff 100%); }
+.dark .weather-hero { background: linear-gradient(140deg, #172232 5%, #192b40 62%, #1c3857 100%); }
+.map-placeholder { background: linear-gradient(135deg, #f8fbff, #edf5fd); }
+.dark .map-placeholder { background: linear-gradient(135deg, #172232, #1a2a3e); }
+.dark .app-topbar, .dark .app-sidebar, .dark .mobile-bottom-nav { background-color: rgba(18, 27, 40, .97); }
+.dark .bg-white { background-color: #172232 !important; }
+.dark .bg-white\/85, .dark .bg-white\/70, .dark .bg-white\/60, .dark .bg-white\/95 { background-color: rgba(23, 34, 50, .94) !important; }
+.dark .bg-slate-50, .dark .bg-slate-50\/70, .dark .bg-slate-100 { background-color: #1d2a3b !important; }
+.dark .bg-blue-50, .dark .bg-blue-50\/70, .dark .bg-blue-100 { background-color: #172f4c !important; }
+.dark .bg-emerald-50 { background-color: #14342c !important; }
+.dark .bg-amber-50 { background-color: #3b2d18 !important; }
+.dark .bg-amber-200 { background-color: #59451f !important; }
+.dark .bg-rose-50 { background-color: #3b2026 !important; }
+.dark .text-slate-400, .dark .text-slate-500, .dark .text-slate-600, .dark .text-slate-700 { color: #a1aec1 !important; }
+.dark .text-blue-950, .dark .text-blue-900, .dark .text-amber-950, .dark .text-amber-900, .dark .text-rose-800 { color: #e7edf6 !important; }
+.dark .text-emerald-900 { color: #b6e5d4 !important; }
+.dark .border-blue-100, .dark .border-blue-200, .dark .border-amber-200, .dark .border-amber-300, .dark .border-rose-200 { border-color: #3b506a !important; }
+.dark .shadow-card { box-shadow: 0 14px 40px rgba(0, 0, 0, .18); }
+.dark input, .dark select { color: var(--color-ink); background-color: #172232; border-color: var(--color-line); }
+.app-content { min-width: 0; }
+.weather-forecast-strip { scrollbar-width: thin; scrollbar-color: #9db4d4 transparent; }
+.mobile-bottom-nav { min-height: 4.25rem; }
+
+@media (max-width: 1023px) {
+  .app-content main { padding-bottom: 5rem; }
+}
+@media (max-width: 379px) {
+  .app-topbar { padding-left: .5rem; padding-right: .5rem; }
+  .app-topbar button[aria-label="Find a location"] { display: none; }
+  .app-topbar button[aria-label="Open voice assistant"] { display: none; }
+  .app-topbar select#language-select { width: 50px; padding-left: 3px; padding-right: 1px; }
+  .app-topbar > a > span:last-child > span:first-child { font-size: 1rem; }
+}
+@media (min-width: 380px) and (max-width: 639px) {
+  .app-topbar button[aria-label="Open voice assistant"] { display: none; }
+}
 
 .loading-dot {
   width: 15px;

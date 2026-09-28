@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# ---- Python ----
+﻿# ---- Python ----
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -18,6 +17,7 @@ env/
 .env
 .env.local
 .env.production
+.env.development.local
 
 # ---- IDE ----
 .vscode/
@@ -45,7 +45,6 @@ htmlcov/
 # ---- Misc ----
 *.bak
 *.tmp
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -264,4 +263,24 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
->>>>>>> b564e5608355f49e674299776f602fe9da06b647
+
+# Phase 10 â€” local historical weather inputs/outputs (keep directories, never commit data)
+/data/raw/*
+!/data/raw/*/
+/data/raw/*/*
+!/data/raw/*/.gitkeep
+/data/processed/*
+!/data/processed/.gitkeep
+/data/validation/*
+!/data/validation/*/
+/data/validation/*/*
+!/data/validation/*/.gitkeep
+/data/models/*
+!/data/models/.gitkeep
+/data/**/*.nc
+/data/**/*.grd
+/data/**/*.bin
+/data/**/*.parquet
+/data/**/*.pkl
+/data/**/*.joblib
+/data/**/*.onnx

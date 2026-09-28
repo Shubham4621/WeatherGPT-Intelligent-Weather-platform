@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#17263c',
-        muted: '#718096',
-        canvas: '#f4f7fb',
+        ink: 'var(--color-ink)',
+        muted: 'var(--color-muted)',
+        canvas: 'var(--color-canvas)',
         brand: '#2767d7',
         'brand-dark': '#1c4fae',
-        line: '#e5ebf2',
+        line: 'var(--color-line)',
       },
       boxShadow: {
         card: '0 14px 40px rgba(30, 54, 86, 0.07)',

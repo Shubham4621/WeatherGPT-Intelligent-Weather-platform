@@ -55,6 +55,6 @@ describe('WeatherGPT advisory', () => {
     await user.click(screen.getByRole('button', { name: 'Get Advisory' }));
     expect(screen.getByRole('status')).toHaveTextContent(/Generating advisory/);
     finish(new Response(JSON.stringify({ error: 'failure' }), { status: 503 }));
-    expect(await screen.findByRole('alert')).toHaveTextContent(/Unable to generate a weather advisory/);
+    expect(await screen.findByRole('alert')).toHaveTextContent(/HTTP 503: failure/);
   });
 });

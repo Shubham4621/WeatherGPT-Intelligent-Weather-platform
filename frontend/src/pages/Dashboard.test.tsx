@@ -49,8 +49,24 @@ describe('WeatherGPT dashboard', () => {
     expect(await screen.findByRole('heading', { name: /Dhule/ })).toBeInTheDocument();
     expect(screen.getByText((_, element) => element?.tagName === 'P' && element.textContent === '32°')).toBeInTheDocument();
     expect(screen.getByText('58')).toBeInTheDocument();
+    expect(screen.getByText('Rain probability unavailable')).toBeInTheDocument();
+    expect(screen.getByText('Sunrise')).toBeInTheDocument();
     expect(screen.getByText(/Source: OpenWeatherMap/)).toBeInTheDocument();
     await waitFor(() => expect(screen.queryByRole('status')).not.toBeInTheDocument());
+  });
+
+  it('shows an API-backed forecast preview and omits unavailable probability fields', async () => {
+    const forecast = { location: sampleWeather.location, source: 'OpenWeatherMap', forecasted_at: '2026-09-24T08:00:00Z', forecast: [{ date: '2026-09-25T00:00:00Z', temperature_min: 22, temperature_max: 30, feels_like: null, humidity: null, description: 'light rain', cloudiness: null, wind_speed: 2.1, rain_probability: null }] };
+    const alerts = { location: 'Dhule', district: 'Dhule', state: 'Maharashtra', issued_at: '2026-09-24T08:00:00Z', forecast_days: [], source: 'IMD', source_url: 'https://mausam.imd.gov.in/' };
+    vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(new Response(JSON.stringify(sampleWeather), { status: 200, headers: { 'Content-Type': 'application/json' } }))
+      .mockResolvedValueOnce(new Response(JSON.stringify(alerts), { status: 200, headers: { 'Content-Type': 'application/json' } }))
+      .mockResolvedValueOnce(new Response(JSON.stringify(forecast), { status: 200, headers: { 'Content-Type': 'application/json' } }));
+    const user = userEvent.setup(); renderDashboard();
+    await user.click(screen.getByRole('button', { name: /search/i }));
+    expect(await screen.findByRole('heading', { name: /1-day outlook for Dhule/ })).toBeInTheDocument();
+    expect(screen.getByText('Wind 2.1 m/s')).toBeInTheDocument();
+    expect(screen.queryByText(/Rain \d+%/)).not.toBeInTheDocument();
   });
 
   it('shows a friendly backend error and does not display internal details', async () => {
@@ -58,7 +74,7 @@ describe('WeatherGPT dashboard', () => {
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(new TypeError('socket ECONNREFUSED internal stack'));
     renderDashboard();
     await user.click(screen.getByRole('button', { name: /search/i }));
-    expect(await screen.findByRole('alert')).toHaveTextContent(/unable to reach WeatherGPT/i);
+    expect(await screen.findByRole('alert')).toHaveTextContent(/Connection\/CORS failure contacting .*allows this frontend origin/i);
     expect(screen.queryByText(/ECONNREFUSED|internal stack/i)).not.toBeInTheDocument();
   });
 
@@ -79,7 +95,7 @@ describe('WeatherGPT dashboard', () => {
     const openAlerts = vi.fn();
     render(<Dashboard onOpenChat={vi.fn()} onOpenAlerts={openAlerts}/>);
     await user.click(screen.getByRole('button', { name: /search/i }));
-    const banner = await screen.findByRole('button', { name: /IMD Weather Alert.*Heavy Rain/s });
+      const banner = await screen.findByRole('button', { name: /Official IMD warning.*Heavy Rain/s });
     await user.click(banner);
     expect(openAlerts).toHaveBeenCalledOnce();
   });

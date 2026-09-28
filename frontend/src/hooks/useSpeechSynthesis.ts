@@ -14,6 +14,7 @@ export function useSpeechSynthesis(service = new SpeechSynthesisService()) {
       start: () => setSpeaking(true),
       end: () => setSpeaking(false),
       error: () => { setSpeaking(false); setUnavailable(true); },
+      cancelled: () => setSpeaking(false),
     });
     if (!result.ok) { setSpeaking(false); setUnavailable(true); return; }
     setFallbackVoice(result.fallback);

@@ -38,6 +38,6 @@ describe('Forecast page', () => {
     render(<Forecast />);
     fireEvent.click(screen.getByRole('button', { name: 'Get forecast' }));
     expect(await screen.findByRole('alert')).toBeTruthy();
-    expect(screen.getByRole('alert').textContent).toContain('couldn\'t find weather');
+    expect(screen.getByRole('alert').textContent).toContain('HTTP 404: Location not found');
   });
 });

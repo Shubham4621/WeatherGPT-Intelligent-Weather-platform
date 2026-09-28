@@ -14,7 +14,8 @@ describe('Alerts page', () => {
   it('renders multiple official warnings, severity and source', () => {
     render(<><AlertCard day={baseDay} district="Dhule"/><p>{alertPayload.source}</p></>);
     expect(screen.getByText('Heavy Rain, Hailstorm')).toBeInTheDocument();
-    expect(screen.getByText('IMD Level: Orange')).toBeInTheDocument();
+    expect(screen.getByText('IMD Level:')).toBeInTheDocument();
+    expect(screen.getByLabelText('Severity Orange')).toBeInTheDocument();
     expect(screen.getByText('Meaning: Alert')).toBeInTheDocument();
     expect(screen.getByText(alertPayload.source)).toBeInTheDocument();
   });

@@ -93,3 +93,6 @@ async def test_response_schema_completeness(client):
         "wind_speed", "wind_direction", "description",
     ):
         assert required_key in weather_keys
+
+
+    

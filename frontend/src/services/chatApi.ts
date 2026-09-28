@@ -1,7 +1,6 @@
 import type { ChatResponse } from '../types/chat';
 import type { Language } from '../i18n';
-
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000').replace(/\/$/, '');
+import { API_BASE_URL, apiFetch, getApiErrorMessage, ApiClientError } from './apiClient';
 const REQUEST_TIMEOUT_MS = 60_000;
 
 export class ChatApiError extends Error {
@@ -18,7 +17,7 @@ export async function sendChatMessage(message: string, language: Language = 'en'
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/chat`, {
+    const response = await apiFetch('/api/v1/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ message: normalizedMessage, language }),
@@ -26,13 +25,7 @@ export async function sendChatMessage(message: string, language: Language = 'en'
     });
 
     if (!response.ok) {
-      if (response.status === 404) {
-        throw new ChatApiError("We couldn't find weather for that city. Check its spelling and try again.", 404);
-      }
-      if (response.status >= 500) {
-        throw new ChatApiError("WeatherGPT couldn't get a reliable response just now. Please try again shortly.", response.status);
-      }
-      throw new ChatApiError('Please enter a supported weather question with a city name.', response.status);
+      throw new ChatApiError(await getApiErrorMessage(response, 'WeatherGPT could not process that request.'), response.status);
     }
 
     const body: unknown = await response.json();
@@ -42,10 +35,11 @@ export async function sendChatMessage(message: string, language: Language = 'en'
     return body;
   } catch (error) {
     if (error instanceof ChatApiError) throw error;
+    if (error instanceof ApiClientError) throw new ChatApiError(error.message, error.status);
     if (error instanceof DOMException && error.name === 'AbortError') {
       throw new ChatApiError('WeatherGPT is taking longer than expected. Please try again.');
     }
-    throw new ChatApiError('Unable to reach WeatherGPT. Check that the backend is running and try again.');
+    throw new ChatApiError(`Connection/CORS failure contacting ${API_BASE_URL}. Check the backend address and CORS allowlist.`);
   } finally {
     window.clearTimeout(timeout);
   }

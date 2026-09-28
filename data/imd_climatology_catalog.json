@@ -1,0 +1,4184 @@
+{
+  "catalog_title": "Locally supplied IMD gridded climatology metadata inventory",
+  "inspection_is_metadata_only": true,
+  "period_note": "The files declare a 30-year climatology; exact baseline years are not encoded in inspected metadata.",
+  "file_count": 54,
+  "month_completeness": {
+    "maximum_temperature (0.5 degree)": {
+      "available_months": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct"
+      ],
+      "missing_months": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "nov",
+        "dec"
+      ],
+      "unique_month_count": 5
+    },
+    "mean_temperature (0.5 degree)": {
+      "available_months": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "missing_months": [],
+      "unique_month_count": 12
+    },
+    "minimum_temperature (0.5 degree)": {
+      "available_months": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "missing_months": [],
+      "unique_month_count": 12
+    },
+    "rainfall (0.25 degree)": {
+      "available_months": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "missing_months": [],
+      "unique_month_count": 12
+    },
+    "rainfall (1.0 degree)": {
+      "available_months": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "missing_months": [],
+      "unique_month_count": 12
+    }
+  },
+  "files": [
+    {
+      "filename": "rf_1deg_apr_clm.nc",
+      "path": "rainfall/rf_1deg_apr_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "65b010be9c1e1dbb3c3f142d3855d24071609f218d683bd0bb050986c4d0f9c9",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "apr",
+      "month_number": 4,
+      "file_month_attribute_zero_based": 3,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 3,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_aug_clm.nc",
+      "path": "rainfall/rf_1deg_aug_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "cff6ec008a805c7410f22fbe0eb95b340ff0f5e9671817af86195402ccf4d1c4",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "aug",
+      "month_number": 8,
+      "file_month_attribute_zero_based": 7,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 7,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_dec_clm.nc",
+      "path": "rainfall/rf_1deg_dec_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "34fe6910904f3e58ac754d31016323ef6e2b025867b854ed84b4d39615d8f6a6",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "dec",
+      "month_number": 12,
+      "file_month_attribute_zero_based": 11,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 11,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_feb_clm.nc",
+      "path": "rainfall/rf_1deg_feb_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "622acc2774283a761fb2f0368953b9b4e96545c8feba2008ded55cdec44a2b91",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "feb",
+      "month_number": 2,
+      "file_month_attribute_zero_based": 1,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 1,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_jan_clm.nc",
+      "path": "rainfall/rf_1deg_jan_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "42ef06aa96d3c16b4b0e7cec7fb2b1da3d1033d1bdf15a2816bdadb53978caec",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "jan",
+      "month_number": 1,
+      "file_month_attribute_zero_based": 0,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 0,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_jul_clm.nc",
+      "path": "rainfall/rf_1deg_jul_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "3a6ff32402087d755fc86044f31f7a1765417249932c899635dae5017e504c34",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "jul",
+      "month_number": 7,
+      "file_month_attribute_zero_based": 6,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 6,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_jun_clm.nc",
+      "path": "rainfall/rf_1deg_jun_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "d044de2adf6fe0ccfdbbe42d2f307481976e87839965ff340608b12ead33bf07",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "jun",
+      "month_number": 6,
+      "file_month_attribute_zero_based": 5,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 5,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_mar_clm.nc",
+      "path": "rainfall/rf_1deg_mar_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "0ee315dfa23dbd7f39ea167ef642c39b4cb96c7b6c0a2e8d12c18bc175f8e7db",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "mar",
+      "month_number": 3,
+      "file_month_attribute_zero_based": 2,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 2,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_may_clm.nc",
+      "path": "rainfall/rf_1deg_may_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "df2e6d04a8fb675a32cbe43937c08e229349afd7ab3e74bce3e784a736b36669",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "may",
+      "month_number": 5,
+      "file_month_attribute_zero_based": 4,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 4,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_nov_clm.nc",
+      "path": "rainfall/rf_1deg_nov_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "cabe7843382db5cc5f2894ac6482c11fdad062707a06d012963238b3046279b1",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "nov",
+      "month_number": 11,
+      "file_month_attribute_zero_based": 10,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 10,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_oct_clm.nc",
+      "path": "rainfall/rf_1deg_oct_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "db1268f97e7aaa0d331e111c3c6c7b6150fc9158de939216dc93671ab67217ae",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "oct",
+      "month_number": 10,
+      "file_month_attribute_zero_based": 9,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 9,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_1deg_sep_clm.nc",
+      "path": "rainfall/rf_1deg_sep_clm.nc",
+      "size_bytes": 10583,
+      "sha256": "21c2d81217dfd1b11a2fee260c612981d19654f972c47156f75e477eb8ac8099",
+      "parameter": "rainfall",
+      "product_code": "rf_1deg",
+      "month": "sep",
+      "month_number": 9,
+      "file_month_attribute_zero_based": 8,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 1.0,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        33,
+        35
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 33,
+        "lon": 35
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 33,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.5,
+        "count": 35,
+        "step_degrees": 1.0,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 8,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From rf_1991.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From rf_1991.grd"
+      },
+      "source_provenance": "From rf_1991.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 20.5,
+        "grid_longitude": 74.5,
+        "distance_km": 54.333
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_apr_clm.nc",
+      "path": "rainfall/rf_p25_apr_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "c617139ab218b6a20e1f6bdfe3fd199019eb5dbc0ca8ee3afddaaf77962a1141",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "apr",
+      "month_number": 4,
+      "file_month_attribute_zero_based": 3,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 3,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_aug_clm.nc",
+      "path": "rainfall/rf_p25_aug_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "fa512d05386270f033554b7273f2de3bfd3aceb4e7909762e490fd7840f54ef8",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "aug",
+      "month_number": 8,
+      "file_month_attribute_zero_based": 7,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 7,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_dec_clm.nc",
+      "path": "rainfall/rf_p25_dec_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "c7e0c0c62022ebe5039754abae9ba0fbd3e9cfe964da0eeaaee24af7e6533b27",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "dec",
+      "month_number": 12,
+      "file_month_attribute_zero_based": 11,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 11,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_feb_clm.nc",
+      "path": "rainfall/rf_p25_feb_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "bc6854008557f329c2aad90bc207deb9a563bcc209e5288048e83ded445b9fe5",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "feb",
+      "month_number": 2,
+      "file_month_attribute_zero_based": 1,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 1,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_jan_clm.nc",
+      "path": "rainfall/rf_p25_jan_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "6692612864c95c231015c757c8199e1cb290af55b31d46a02213ae2ec416b449",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "jan",
+      "month_number": 1,
+      "file_month_attribute_zero_based": 0,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 0,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_jul_clm.nc",
+      "path": "rainfall/rf_p25_jul_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "5b38aa72364c32b902ba0b7a3c0257ced10104d4e7d920e1b3ef7823f496ca5c",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "jul",
+      "month_number": 7,
+      "file_month_attribute_zero_based": 6,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 6,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_jun_clm.nc",
+      "path": "rainfall/rf_p25_jun_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "833ae63386aab3fe9a524c005c4c88eaba9d80947580363b65d9b2044478b1d4",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "jun",
+      "month_number": 6,
+      "file_month_attribute_zero_based": 5,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 5,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_mar_clm.nc",
+      "path": "rainfall/rf_p25_mar_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "ac23553c7287ab7db6d928ab0fea2b5f813fc5b723b570da5ec30ad874d4850d",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "mar",
+      "month_number": 3,
+      "file_month_attribute_zero_based": 2,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 2,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_may_clm.nc",
+      "path": "rainfall/rf_p25_may_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "35a7613c589f8af956bd7be04df62cd3fcc3e77a815b558715d21492e2fed352",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "may",
+      "month_number": 5,
+      "file_month_attribute_zero_based": 4,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 4,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_nov_clm.nc",
+      "path": "rainfall/rf_p25_nov_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "3bed7ecc8a96a4b282c99ba5efa07d69f9a8046d6423c2a71469bb64148ab250",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "nov",
+      "month_number": 11,
+      "file_month_attribute_zero_based": 10,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 10,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_oct_clm.nc",
+      "path": "rainfall/rf_p25_oct_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "03b2dd883f986fadd968b9f153abeea4e993457473b9b8fb96b7101203ca101a",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "oct",
+      "month_number": 10,
+      "file_month_attribute_zero_based": 9,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 9,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "rf_p25_sep_clm.nc",
+      "path": "rainfall/rf_p25_sep_clm.nc",
+      "size_bytes": 142239,
+      "sha256": "22c29f9e5b2eaa9276656ad05dd526c2270a6c54be3cb5668eebc2013873e9cc",
+      "parameter": "rainfall",
+      "product_code": "rf_p25",
+      "month": "sep",
+      "month_number": 9,
+      "file_month_attribute_zero_based": 8,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.25,
+      "units": "mm",
+      "variable_names": [
+        "rf",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "rf",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        129,
+        135
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 129,
+        "lon": 135
+      },
+      "latitude": {
+        "minimum": 6.5,
+        "maximum": 38.5,
+        "count": 129,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 66.5,
+        "maximum": 100.0,
+        "count": 135,
+        "step_degrees": 0.25,
+        "ordering": "ascending"
+      },
+      "missing_value": -999.0,
+      "fill_value": -999.0,
+      "variable_attributes": {
+        "month": 8,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": -999.0,
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "time": 32873.0,
+        "history": "From ind1991_rfp25.grd",
+        "units": "mm",
+        "long_name": "Rainfall",
+        "_FillValue": -999.0
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "NCL_tag": "calculate_monthly_values: arith=sum",
+        "history": "From ind1991_rfp25.grd"
+      },
+      "source_provenance": "From ind1991_rfp25.grd",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 74.75,
+        "distance_km": 12.272
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_aug_clm.nc",
+      "path": "temperature/tmax_p5_aug_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "164757ba9dc2e9cb0e510792b21f51580952c98fe43ab200b6da658574a02568",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "aug",
+      "month_number": 8,
+      "file_month_attribute_zero_based": 7,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 7,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_jul_clm.nc",
+      "path": "temperature/tmax_p5_jul_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "ae7fad6c821093b1f7c0ce4bd505c66fb79b855c5d0c05af860ae204d3d30289",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "jul",
+      "month_number": 7,
+      "file_month_attribute_zero_based": 6,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 6,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_jun_clm (1).nc",
+      "path": "temperature/tmax_p5_jun_clm (1).nc",
+      "size_bytes": 16515,
+      "sha256": "369b51e1def769fee9b97f67923759d861ad62f9ce5eab403f6cebf6d0e1eb6b",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "jun",
+      "month_number": 6,
+      "file_month_attribute_zero_based": 5,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 5,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_jun_clm.nc",
+      "path": "temperature/tmax_p5_jun_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "369b51e1def769fee9b97f67923759d861ad62f9ce5eab403f6cebf6d0e1eb6b",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "jun",
+      "month_number": 6,
+      "file_month_attribute_zero_based": 5,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 5,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_oct_clm.nc",
+      "path": "temperature/tmax_p5_oct_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "71d9061c3cadc9cf7eefe7f537e745fe4990bc63c38a2e1ef9da3c1eacda6e41",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "oct",
+      "month_number": 10,
+      "file_month_attribute_zero_based": 9,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 9,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_sep_clm.nc",
+      "path": "temperature/tmax_p5_sep_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "b69251265007b8c9b5f5a3b8a6b67a016ffdb566c5d1464e4b971cf78927bd19",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "sep",
+      "month_number": 9,
+      "file_month_attribute_zero_based": 8,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 8,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_apr_clm.nc",
+      "path": "temperature/tmean_p5_apr_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "2748847f15766d3b194cae60d4bfe9a03cce893e9e5d4eae6119c11616c27308",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "apr",
+      "month_number": 4,
+      "file_month_attribute_zero_based": 3,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 3,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_aug_clm.nc",
+      "path": "temperature/tmean_p5_aug_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "39736189e64482e485e49571454a92ee1c976a0da3ae4bda60081b40e9b6d44f",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "aug",
+      "month_number": 8,
+      "file_month_attribute_zero_based": 7,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 7,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_dec_clm.nc",
+      "path": "temperature/tmean_p5_dec_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "1ad4a98d92374b552079ad1b83fc342811d0724ea027e27bda52ad15fdf0db4e",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "dec",
+      "month_number": 12,
+      "file_month_attribute_zero_based": 11,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 11,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_feb_clm.nc",
+      "path": "temperature/tmean_p5_feb_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "7084a91e3b5e7460d414bd6b868fcc143f9bb9ce6f0894bc17f33f5da2225f9f",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "feb",
+      "month_number": 2,
+      "file_month_attribute_zero_based": 1,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 1,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_jan_clm.nc",
+      "path": "temperature/tmean_p5_jan_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "100dd9fabdba797421525d31900ad2c3b24ed3ce92553400a93778acdcfb4a77",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "jan",
+      "month_number": 1,
+      "file_month_attribute_zero_based": 0,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 0,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_jul_clm.nc",
+      "path": "temperature/tmean_p5_jul_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "8928fd7e7dd3b04d91c7e8b831a936b387a7f05183dd3edc3f986d455646b17c",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "jul",
+      "month_number": 7,
+      "file_month_attribute_zero_based": 6,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 6,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_jun_clm.nc",
+      "path": "temperature/tmean_p5_jun_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "63e4a4397d42309c1888149ba111a0ddb6015f240da80ee238398d2d93e375c9",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "jun",
+      "month_number": 6,
+      "file_month_attribute_zero_based": 5,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 5,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_mar_clm.nc",
+      "path": "temperature/tmean_p5_mar_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "0378070a20b2140e8c1a7e36636dbad4a84701baf85b70e7bbdfdbb56c7a4d72",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "mar",
+      "month_number": 3,
+      "file_month_attribute_zero_based": 2,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 2,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_may_clm.nc",
+      "path": "temperature/tmean_p5_may_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "c101b60dc5f9ce46bb70a335b05ac56fa3799c752c1325217ec29f35d60b1e15",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "may",
+      "month_number": 5,
+      "file_month_attribute_zero_based": 4,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 4,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_nov_clm.nc",
+      "path": "temperature/tmean_p5_nov_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "0b9ee9a602fec5169dc47099bf9763f09e48ee4879d7db5fe5046d8325152d17",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "nov",
+      "month_number": 11,
+      "file_month_attribute_zero_based": 10,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 10,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_oct_clm.nc",
+      "path": "temperature/tmean_p5_oct_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "61623981828882a61184af729200c83e168ea60847f6d45f8171aab9d3e32aea",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "oct",
+      "month_number": 10,
+      "file_month_attribute_zero_based": 9,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 9,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmean_p5_sep_clm.nc",
+      "path": "temperature/tmean_p5_sep_clm.nc",
+      "size_bytes": 16519,
+      "sha256": "40055d0da6571a9afc7026abdc6040331a99baaa1b60fdf7888e6a2385f3a50e",
+      "parameter": "mean_temperature",
+      "product_code": "tmean_p5",
+      "month": "sep",
+      "month_number": 9,
+      "file_month_attribute_zero_based": 8,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmean",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmean",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 8,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_apr_clm.nc",
+      "path": "temperature/tmin_p5_apr_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "3dcad0d944c4cbc44d63f244680e08ce616475974cd04a0889ac50cd3cdf9ad0",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "apr",
+      "month_number": 4,
+      "file_month_attribute_zero_based": 3,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 3,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_aug_clm.nc",
+      "path": "temperature/tmin_p5_aug_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "644bf27a1c3ec2dc0e52f81ac006d49f5f17dc823079c8e61ae1a25771eb3292",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "aug",
+      "month_number": 8,
+      "file_month_attribute_zero_based": 7,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 7,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_dec_clm.nc",
+      "path": "temperature/tmin_p5_dec_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "1ace44bb9b9b16849cf2f7bb4ce92ab284962607f13bf04d801270aab7745582",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "dec",
+      "month_number": 12,
+      "file_month_attribute_zero_based": 11,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 11,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_feb_clm.nc",
+      "path": "temperature/tmin_p5_feb_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "0a0347b85d8be2c00fe042196bdcdc11e740b9adc46b2482518c7c999937e397",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "feb",
+      "month_number": 2,
+      "file_month_attribute_zero_based": 1,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 1,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_jan_clm.nc",
+      "path": "temperature/tmin_p5_jan_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "64a3d34815b926951775efdf7bf68a4bac250baed2924a4e594b57e5d5f14b67",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "jan",
+      "month_number": 1,
+      "file_month_attribute_zero_based": 0,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 0,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_jul_clm.nc",
+      "path": "temperature/tmin_p5_jul_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "20bb258b1c474d998c846eba847bade6e3cf31767fe2254e71ff3e850fd73095",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "jul",
+      "month_number": 7,
+      "file_month_attribute_zero_based": 6,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 6,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_jun_clm.nc",
+      "path": "temperature/tmin_p5_jun_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "e9bf1f6bc0da5fd19ba2b265d7707805496faa9fa9040010c3ffde52ad0bb3ec",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "jun",
+      "month_number": 6,
+      "file_month_attribute_zero_based": 5,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 5,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_mar_clm.nc",
+      "path": "temperature/tmin_p5_mar_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "05cb8de344b99febeb24ba5dba7cf46e723e87739e5d81d01f15e99345b3af87",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "mar",
+      "month_number": 3,
+      "file_month_attribute_zero_based": 2,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 2,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_may_clm.nc",
+      "path": "temperature/tmin_p5_may_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "306de290254069946a696e85ae966ea847fef729d1a40162beb48b030c9ef49f",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "may",
+      "month_number": 5,
+      "file_month_attribute_zero_based": 4,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 4,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_nov_clm.nc",
+      "path": "temperature/tmin_p5_nov_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "b34247914b00e7265546fe4355beac00017f103034528b4c6b7053ce7849c43d",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "nov",
+      "month_number": 11,
+      "file_month_attribute_zero_based": 10,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 10,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_oct_clm.nc",
+      "path": "temperature/tmin_p5_oct_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "92d8969141ef701f00f0101607963e755936dd82a3f9fac85c5e1e9464914705",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "oct",
+      "month_number": 10,
+      "file_month_attribute_zero_based": 9,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 9,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmin_p5_sep_clm.nc",
+      "path": "temperature/tmin_p5_sep_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "f56d433be52e75017e9b6620893413f300d1dd092f69678ccd9234154cc0b94e",
+      "parameter": "minimum_temperature",
+      "product_code": "tmin_p5",
+      "month": "sep",
+      "month_number": 9,
+      "file_month_attribute_zero_based": 8,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "30 years (exact start/end years not encoded)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmin",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmin",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 8,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    }
+  ],
+  "authoritative_source_review": {
+    "review_date": "2026-09-27",
+    "baseline": {
+      "local_metadata_declaration": "Climatology: 30 years",
+      "verified_start_year": null,
+      "verified_end_year": null,
+      "status": "UNSPECIFIED_FOR_THESE_FILES",
+      "finding": "No reviewed authoritative source identifies the baseline years for these exact monthly gridded NetCDF products. Do not label them 1991-2020.",
+      "sources_reviewed": [
+        "https://dsp.imdpune.gov.in/home_gridded_climatology.php",
+        "https://imdpune.gov.in/climinfo/Max.html",
+        "https://imdpune.gov.in/climinfo/Min.html",
+        "https://www.imdpune.gov.in/library/public/Climatological%20Tables%201991-2020.pdf"
+      ]
+    },
+    "temperature_units": {
+      "tmax": {
+        "unit": null,
+        "verified_for_this_product": false
+      },
+      "tmin": {
+        "unit": null,
+        "verified_for_this_product": false
+      },
+      "tmean": {
+        "unit": null,
+        "verified_for_this_product": false
+      },
+      "finding": "The local monthly 0.5-degree climatology files contain no units attribute. IMD documentation explicitly gives Celsius for a separate daily 1-degree gridded temperature product; that unit was not transferred to these products.",
+      "related_product_reference": "https://imdpune.gov.in/cmpg/Griddata/Max_1_Bin.html"
+    },
+    "tmax_month_availability": {
+      "local_files_found": [
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct"
+      ],
+      "unique_local_month_count": 5,
+      "june_duplicate_is_byte_identical": true,
+      "official_exact_monthly_download_list_verified": false,
+      "finding": "The official IMD Climate Information page identifies a Monthly Maximum Temperature Climatology view, but its accessible text does not expose a product file list, period, or unit. The IMD-DSP Gridded Climatology page is visible with two selector controls, but its available choices are not exposed in the accessible page text. The public Gridded Data Archive lists 1-degree historical daily Tmax/Tmin and 0.5-degree real-time daily Tmax/Tmin; these are not the monthly 0.5-degree climatology products. No authoritative source reviewed explains the five-month local subset or proves that IMD only publishes those five months.",
+      "sources_reviewed": [
+        "https://imdpune.gov.in/climinfo/Max.html",
+        "https://dsp.imdpune.gov.in/home_gridded_climatology.php",
+        "https://www.imdpune.gov.in/lrfindex.php",
+        "https://imdpune.gov.in/cmpg/Griddata/Max_1_Bin.html"
+      ]
+    }
+  }
+}

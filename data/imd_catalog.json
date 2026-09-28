@@ -1,0 +1,38 @@
+{
+  "reference_location": { "name": "Dhule AWS reference coordinate", "latitude": 20.9, "longitude": 74.8, "is_station_observation": false },
+  "datasets": [
+    {
+      "source": "India Meteorological Department (IMD Pune)",
+      "dataset": "Daily Gridded Rainfall",
+      "variable": "rainfall_mm",
+      "resolution_degrees": 0.25,
+      "period": { "start_year": 1901, "end_year": 2024 },
+      "units": "mm",
+      "missing_values": [-999.0],
+      "format": "NetCDF or IMD binary grid",
+      "reference_url": "https://imdpune.gov.in/cmpg/Griddata/Rainfall_25_NetCDF.html"
+    },
+    {
+      "source": "India Meteorological Department (IMD Pune)",
+      "dataset": "Daily Gridded Maximum Temperature",
+      "variable": "temp_max_c",
+      "resolution_degrees": 1.0,
+      "period": { "start_year": 1951, "end_year": 2024 },
+      "units": "°C",
+      "missing_values": [99.9, -999.0],
+      "format": "IMD direct-access binary grid",
+      "reference_url": "https://www.imdpune.gov.in/cmpg/Griddata/Max_1_Bin.html"
+    },
+    {
+      "source": "India Meteorological Department (IMD Pune)",
+      "dataset": "Daily Gridded Minimum Temperature",
+      "variable": "temp_min_c",
+      "resolution_degrees": 1.0,
+      "period": { "start_year": 1951, "end_year": 2024 },
+      "units": "°C",
+      "missing_values": [99.9, -999.0],
+      "format": "IMD direct-access binary grid",
+      "reference_url": "https://www.imdpune.gov.in/cmpg/Griddata/Min_1_Bin.html"
+    }
+  ]
+}
