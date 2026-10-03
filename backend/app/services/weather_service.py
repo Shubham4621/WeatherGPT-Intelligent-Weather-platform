@@ -60,6 +60,16 @@ class WeatherService:
     async def get_forecast_by_city(self, city: str) -> ForecastResponse:
         """Fetch and aggregate OpenWeatherMap's 3-hour forecast into local days."""
         data = await self._fetch("/forecast", {"q": city, "units": "metric", "appid": self.api_key})
+        return self._normalize_forecast(data)
+
+    async def get_forecast_by_coords(self, lat: float, lon: float) -> ForecastResponse:
+        """Fetch forecast by validated latitude/longitude coordinates."""
+        if not -90 <= lat <= 90 or not -180 <= lon <= 180:
+            raise WeatherAPIError(detail="Coordinates are outside valid latitude/longitude bounds.", status_code=422)
+        data = await self._fetch("/forecast", {"lat": lat, "lon": lon, "units": "metric", "appid": self.api_key})
+        return self._normalize_forecast(data)
+
+    def _normalize_forecast(self, data: Dict[str, Any]) -> ForecastResponse:
         try:
             city_data = data["city"]
             rows = data["list"]

@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Forecast from './pages/Forecast';
 import Alerts from './pages/Alerts';
 import Advisory from './pages/Advisory';
+import Agriculture from './pages/Agriculture';
 import Historical from './pages/Historical';
 import { AviationPage, ClimatePage, MarinePage, NwpPage, PredictionPage, SettingsPage, WeatherMapPage } from './pages/PlatformPages';
 import { LanguageContext, readLanguage, type Language } from './i18n';
@@ -23,7 +24,7 @@ export default function App() {
     : page === 'chat' ? <ChatPanel />
       : page === 'alerts' ? <Alerts onOpenAdvisory={() => setPage('advisory')} />
         : page === 'advisory' ? <Advisory />
-          : page === 'agriculture' ? <Advisory initialActivity="AGRICULTURE" agricultureMode />
+          : page === 'agriculture' ? <Agriculture />
             : page === 'historical' ? <Historical />
               : page === 'forecast' ? <Forecast />
                 : page === 'map' ? <WeatherMapPage />

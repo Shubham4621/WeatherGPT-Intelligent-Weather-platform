@@ -84,9 +84,30 @@ def test_temperature_grd_decoder_requires_explicit_cell_order(dataset_type, tmp_
                                year=2024, byte_order="<", cell_order="unknown")
 
 
+@pytest.mark.parametrize("dataset_type", ["tmax", "tmin"])
+def test_temperature_grd_decoder_blocks_before_read_even_with_caller_supplied_layout(
+    dataset_type, tmp_path, monkeypatch,
+):
+    def forbid_payload_read(*args, **kwargs):
+        raise AssertionError("unverified GRD payload must not be opened")
+
+    monkeypatch.setattr(Path, "read_bytes", forbid_payload_read)
+    with pytest.raises(RuntimeError) as blocked:
+        read_binary_grid_point(
+            tmp_path / "not-read.grd", dataset_type, 20.9, 74.8,
+            year=2024, byte_order="<", cell_order="latitude_rows_longitude_fastest",
+        )
+    assert blocked.value.reason_code == "BLOCKED_FORMAT_FIELDS_UNVERIFIED"
+    assert blocked.value.details["unverified_fields"]
+
+
 def test_missing_value_markers_are_null_not_zero():
     assert normalize_missing(-999, "rainfall") is None
     assert normalize_missing(99.9, "tmax") is None
+    assert normalize_missing(99.9, "tmin") is None
+    # -999 is documented for the rainfall product here, not for the temp GRD.
+    assert normalize_missing(-999, "tmax") == -999
+    assert normalize_missing(-999, "tmin") == -999
     assert normalize_missing(0, "rainfall") == 0
 
 
@@ -154,6 +175,23 @@ async def test_local_provider_rejects_empty_installed_file(tmp_path):
     path.write_text("date,latitude,longitude,rainfall_mm,temp_max_c,temp_min_c,source,dataset,grid_resolution\n", encoding="utf-8")
     result = await LocalImdGridHistoricalProvider(path).fetch("Dhule", date(2024, 1, 1), date(2024, 1, 2))
     assert result.availability_status == "DATA_INVALID"
+
+
+@pytest.mark.parametrize("rows", [
+    "2024-01-01,21,74.75,1,IMD,test,0.25\n2024-01-01,21,74.75,2,IMD,test,0.25\n",
+    "2024-01-01,21,74.75,1,IMD,test,0.25\n2024-01-03,21,74.75,2,IMD,test,0.25\n",
+    "2024-01-01,21,74.75,,IMD,test,0.25\n",
+])
+@pytest.mark.anyio
+async def test_local_provider_does_not_repair_duplicate_gap_or_missing_observations(tmp_path, rows):
+    path = tmp_path / "rain.csv"
+    path.write_text("date,latitude,longitude,rainfall_mm,source,dataset,grid_resolution\n" + rows, encoding="utf-8")
+    result = await LocalImdGridHistoricalProvider(path).fetch("Dhule", date(2024, 1, 1), date(2024, 1, 3))
+    if ",,IMD," in rows:
+        assert result.status == "partial" and result.metadata["missing_rainfall"] == 1
+        assert result.records[0].rainfall is None
+    else:
+        assert result.status == "unavailable" and result.availability_status == "DATA_INVALID"
 
 
 @pytest.mark.anyio

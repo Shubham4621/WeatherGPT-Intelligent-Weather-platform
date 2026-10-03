@@ -6,6 +6,7 @@ from enum import StrEnum
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.schemas.weather import AlertDay, WeatherAdvisoryResponse, WeatherCondition
+from app.schemas.agriculture import AgricultureActivity
 from app.services.localization_service import validate_language
 
 
@@ -33,6 +34,8 @@ class ChatIntent(StrEnum):
     ALERT = "ALERT"
     ADVISORY = "ADVISORY"
     HISTORICAL_WEATHER = "HISTORICAL_WEATHER"
+    NWP = "NWP"
+    AGRICULTURE = "AGRICULTURE"
     UNKNOWN = "UNKNOWN"
 
 
@@ -80,6 +83,7 @@ class ChatIntentResult(BaseModel):
     forecast_days: int = Field(default=1, ge=1, le=5)
     advisory_day_offset: int = Field(default=1, ge=0, le=4)
     activity: AdvisoryActivity = AdvisoryActivity.GENERAL_PRECAUTION
+    agriculture_activity: AgricultureActivity = AgricultureActivity.GENERAL
 
     @field_validator("city")
     @classmethod
@@ -103,3 +107,6 @@ class ChatResponse(BaseModel):
     forecast: list[dict] | None = None
     alert_days: list[AlertDay] | None = None
     advisory: WeatherAdvisoryResponse | None = None
+    historical_data: dict | None = None
+    nwp_data: dict | None = None
+    agriculture_data: dict | None = None

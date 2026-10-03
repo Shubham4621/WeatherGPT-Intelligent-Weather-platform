@@ -23,6 +23,9 @@ cloudiness for cloud-cover or cloudy questions; condition for questions about
 the general weather description. Use general only for a broad weather summary.
 Extract only a city explicitly named by the user; never guess one.
 Forecast requests supported by the provider's five-day range use FORECAST.
+Requests explicitly asking for GFS, NWP, numerical weather model output, or a weather model run use NWP.
+Weather-based farm decisions (irrigation, sowing, spraying, harvesting, field operations,
+crop/weather heat, rainfall, wind, or general agriculture guidance) use AGRICULTURE.
 Set forecast_day_offset to 0 for today, 1 for tomorrow, 2 for day after tomorrow,
 and 0 for unspecified or multi-day requests. Official warning/alert lookup requests use ALERT.
 Practical activity/precaution questions use ADVISORY, including those that also mention warnings.
@@ -167,6 +170,34 @@ class OllamaIntentProvider:
             return str(facts.get("summary", "Weather advisory based on available provider information."))
 
 
+    async def explain_agriculture(self, facts: dict, language: str = "en") -> str:
+        """Phrase deterministic agricultural guidance without generating rules or measurements."""
+        prompt = (
+            "Explain this WeatherGPT weather-based agriculture recommendation in one concise farmer-friendly paragraph. "
+            "Use only supplied JSON. Do not add measurements, crop-specific instructions, chemical advice, disease claims, "
+            "official warnings, or a recommendation different from the deterministic recommendation. State it is not an "
+            "official agricultural department advisory. " + language_prompt(language) +
+            " Return plain text only. Facts: " + json.dumps(facts, ensure_ascii=False)
+        )
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                response = await client.post(f"{self.base_url}/api/chat", json={"model": self.model, "messages": [
+                    {"role": "system", "content": "Explain validated weather-based farm guidance. Never invent or calculate."},
+                    {"role": "user", "content": prompt}], "stream": False, "think": False, "options": {"temperature": 0}})
+            response.raise_for_status()
+            generated = response.json()["message"]["content"].strip()[:800]
+            supplied = json.dumps(facts, ensure_ascii=False).casefold()
+            digits = lambda value: set(re.findall(r"\b\d+(?:\.\d+)?\b", value.casefold()))
+            if not generated or not digits(generated).issubset(digits(supplied)):
+                return str(facts.get("summary", "Weather-based agricultural guidance is unavailable."))
+            if any(term in generated.casefold() for term in ("pesticide dosage", "fertilizer dosage", "crop disease diagnosed")):
+                return str(facts.get("summary", "Weather-based agricultural guidance is unavailable."))
+            return generated
+        except (httpx.HTTPError, ValueError, KeyError, TypeError) as exc:
+            logger.warning("Agriculture phrasing unavailable; using deterministic recommendation", extra={"provider": "ollama", "error_type": type(exc).__name__})
+            return str(facts.get("summary", "Weather-based agricultural guidance is available."))
+
+
 class LLMService:
     """Selects the configured intent provider behind a stable service API."""
 
@@ -184,12 +215,52 @@ class LLMService:
     async def classify(self, message: str, language: str = "en") -> ChatIntentResult:
         language = language.strip().lower()
         routing_message, indicative_city = _indic_question(message, language) if language != "en" else (message, None)
-        historical_terms = ("historical", "history", "last year", "last july", "historical average", "monthly rainfall", "temperature trend", "rainfall trend", "what was the", "in 20")
-        if language == "en" and any(term in message.casefold() for term in historical_terms):
+        lowered_original = message.casefold()
+        agriculture_terms = ("irrigat", "sow", "sowing", "spray", "harvest", "farm work", "field work", "crop weather", "crop heat", "agriculture", "agricultur", "farming", "farm advice")
+        indic_agriculture_terms = ("\u0938\u093f\u0902\u091a\u093e\u0908", "\u0938\u093f\u0902\u091a\u0928", "\u092c\u0941\u0935\u093e\u0908", "\u092a\u0947\u0930\u0923\u0940", "\u091b\u093f\u0921\u093c\u0915\u093e\u0935", "\u092b\u0935\u093e\u0930\u0923\u0940", "\u0915\u091f\u093e\u0908", "\u0915\u093e\u092a\u0923\u0940", "\u0916\u0947\u0924\u0940", "\u0936\u0947\u0924\u0940", "\u092b\u0938\u0932", "\u092a\u0940\u0915", "\u0915\u0943\u0937\u093f")
+        if any(term in routing_message.casefold() for term in agriculture_terms) or any(term in lowered_original for term in indic_agriculture_terms):
+            lowered = routing_message.casefold()
+            if any(term in lowered for term in ("irrigat", "water my crop")) or any(term in lowered_original for term in ("\u0938\u093f\u0902\u091a\u093e\u0908", "\u0938\u093f\u0902\u091a\u0928")):
+                activity = "irrigation"
+            elif any(term in lowered for term in ("sow", "sowing", "planting")) or any(term in lowered_original for term in ("\u092c\u0941\u0935\u093e\u0908", "\u092a\u0947\u0930\u0923\u0940")):
+                activity = "sowing"
+            elif "spray" in lowered or any(term in lowered_original for term in ("\u091b\u093f\u0921\u093c\u0915\u093e\u0935", "\u092b\u0935\u093e\u0930\u0923\u0940")):
+                activity = "spraying"
+            elif "harvest" in lowered or any(term in lowered_original for term in ("\u0915\u091f\u093e\u0908", "\u0915\u093e\u092a\u0923\u0940")):
+                activity = "harvesting"
+            elif any(term in lowered for term in ("heat", "hot", "heat stress")) or any(term in lowered_original for term in ("\u0917\u0930\u094d\u092e\u0940", "\u0909\u0937\u094d\u0923\u0924\u093e", "\u0909\u0937\u094d\u0923")):
+                activity = "heat_stress"
+            elif "wind" in lowered or any(term in lowered_original for term in ("\u0939\u0935\u093e", "\u0935\u093e\u0930\u093e", "\u0935\u093e\u0930\u094d\u092f\u093e")):
+                activity = "wind_risk"
+            elif any(term in lowered for term in ("heavy rain", "waterlog", "drainage")) or any(term in lowered_original for term in ("\u092d\u093e\u0930\u0940 \u092c\u093e\u0930\u093f\u0936", "\u092e\u0941\u0938\u0933\u0927\u093e\u0930", "\u0905\u0924\u093f\u0935\u0943\u0937\u094d\u091f\u0940", "\u091c\u0932\u092d\u0930\u093e\u0935")):
+                activity = "heavy_rain"
+            elif any(term in lowered for term in ("field work", "farm work", "farm operation")) or any(term in lowered_original for term in ("\u0916\u0947\u0924 \u0915\u093e \u0915\u093e\u092e", "\u0936\u0947\u0924\u093e\u0924\u0940\u0932 \u0915\u093e\u092e")):
+                activity = "field_operations"
+            else:
+                activity = "general"
+            city_match = re.search(r"\b(?:in|at|for)\s+([\w][\w .,'’'-]{0,79}?)(?=\s+(?:tomorrow|today|tonight|next|on)\b|[?!.,;]|$)", routing_message, re.IGNORECASE)
+            coordinates = re.search(r"(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)", routing_message)
+            station = re.search(r"\bstation\s+([A-Za-z0-9_-]+)", routing_message, re.IGNORECASE)
+            location = f"{coordinates.group(1)},{coordinates.group(2)}" if coordinates else f"station {station.group(1)}" if station else indicative_city or (city_match.group(1).strip() if city_match else None)
+            return ChatIntentResult(intent=ChatIntent.AGRICULTURE, city=location, agriculture_activity=activity)
+        nwp_terms = ("gfs", "nwp", "numerical weather model", "nwp model", "weather model", "model run", "model wind forecast", "model temperature forecast")
+        if any(term in lowered_original for term in nwp_terms):
+            match = re.search(r"\b(?:in|for|at)\s+([\w][\w .,'â€™-]{0,79}?)(?=\s+(?:tomorrow|today|tonight|next|on)\b|[?!.,;]|$)", message, re.IGNORECASE)
+            city = match.group(1).strip() if match else indicative_city
+            return ChatIntentResult(intent=ChatIntent.NWP, city=city)
+        historical_terms = ("historical", "history", "climatology", "anomaly", "last year", "last july", "historical average", "monthly rainfall", "temperature trend", "rainfall trend", "what was the", "in 20", "normal rainfall", "normal temperature", "wetter than normal", "warmer than normal", "compare 20", "most rainfall", "wettest month", "driest month", "climate trend")
+        is_year_analysis = bool(re.search(r"\b(?:19|20)\d{2}\b", message)) and any(term in message.casefold() for term in ("rain", "temperature", "tmax", "tmin", "weather", "wetter", "warmer"))
+        if language == "en" and (any(term in message.casefold() for term in historical_terms) or is_year_analysis):
             route_city = re.search(r"\b(?:in|for|at)\s+([\w][\w .,'’-]{0,79}?)(?=\s+(?:last|this|during|from|in\s+20\d{2})\b|[?!.,;]|$)", message, re.IGNORECASE)
+            city = route_city.group(1).strip() if route_city else None
+            if city:
+                month_names = "january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec"
+                city = re.sub(rf"\s+in\s+(?:{month_names})(?:\s+20\d{{2}})?$", "", city, flags=re.IGNORECASE)
+                city = re.sub(rf"^(?:{month_names})\s+in\s+", "", city, flags=re.IGNORECASE).strip()
             if route_city is None:
                 route_city = re.search(r"\bdid\s+([A-Z][\w .'-]{0,60}?)\s+(?:receive|have|record)", message, re.IGNORECASE)
-            return ChatIntentResult(intent=ChatIntent.HISTORICAL_WEATHER, city=route_city.group(1).strip() if route_city else None)
+                city = route_city.group(1).strip() if route_city else None
+            return ChatIntentResult(intent=ChatIntent.HISTORICAL_WEATHER, city=city)
         if language != "en" and any(term in message.casefold() for term in ("\u092e\u093e\u0917\u091a\u094d\u092f\u093e", "\u092e\u093e\u0917\u0940\u0932", "\u092a\u093f\u091b\u0932\u0947", "\u092a\u0941\u0930\u093e\u0928\u093e", "\u0907\u0924\u093f\u0939\u093e\u0938")):
             return ChatIntentResult(intent=ChatIntent.HISTORICAL_WEATHER, city=indicative_city)
         if language != "en" and routing_message != message:
@@ -261,5 +332,18 @@ class LLMService:
             try:
                 return await self.provider.explain_advisory(facts, language=language)
             except TypeError:
-                return await self.provider.explain_advisory(facts)
+                return str(facts.get("summary", "Weather advisory based on available provider information."))
         return str(facts.get("summary", "Weather advisory based on available provider information."))
+
+    async def explain_nwp(self, facts: dict, language: str = "en") -> str:
+        if hasattr(self.provider, "explain_nwp"):
+            return await self.provider.explain_nwp(facts, language=language)
+        return str(facts.get("summary", "NWP model output is available."))
+
+    async def explain_agriculture(self, facts: dict, language: str = "en") -> str:
+        if hasattr(self.provider, "explain_agriculture"):
+            try:
+                return await self.provider.explain_agriculture(facts, language=language)
+            except TypeError:
+                return str(facts.get("summary", "Weather-based agricultural guidance is available."))
+        return str(facts.get("summary", "Weather-based agricultural guidance is available."))

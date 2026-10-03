@@ -53,13 +53,20 @@ class Settings(BaseSettings):
 
     # --- Timeouts ---
     WEATHER_API_TIMEOUT: int = 10
+    NWP_TIMEOUT_SECONDS: int = 12
+    NWP_CACHE_TTL_SECONDS: int = 600
 
     # --- IMD official district warning feed ---
     IMD_DISTRICT_WARNING_URL: str = "https://mausam.imd.gov.in/api/warnings_district_api.php"
     IMD_ALERT_TIMEOUT: int = 10
     IMD_ALERT_CACHE_TTL_SECONDS: int = 900
-    # Populate only with the object ID verified from an official IMD district source.
+    # JSON map keyed by city aliases; IDs must be verified against an official IMD source.
+    IMD_DISTRICT_MAPPINGS: str = '{}'
+    # Legacy single-location setting remains supported during migration.
     IMD_DHULE_OBJ_ID: str = ""
+
+    # Named historical reference points map to coordinates; grid analysis remains coordinate-based.
+    HISTORICAL_LOCATION_COORDINATES: str = '{"dhule":{"latitude":20.9,"longitude":74.8,"aliases":["Dhule, Maharashtra","Dhule, India"]}}'
 
 
 settings = Settings()

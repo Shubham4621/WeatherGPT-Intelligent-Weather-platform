@@ -9,9 +9,11 @@ from app.api.routes.chat import get_weather_agent
 from app.core.exceptions import WeatherAPIError, WeatherProviderError
 from app.main import app
 from app.schemas.chat import ChatIntent, ChatIntentResult, ChatResponse, WeatherMetric
+from app.schemas.agriculture import AgricultureActivity, AgricultureAdviceResponse, AgricultureRecommendation
 from app.schemas.weather import CurrentWeatherResponse
 from app.services.llm_service import LLMServiceError
 from app.services.weather_service import WeatherService
+from app.services.llm_service import LLMService
 from app.tools.weather_tools import get_current_weather
 from tests.conftest import SAMPLE_OWM_RESPONSE
 
@@ -120,6 +122,41 @@ async def test_weather_provider_failure_is_controlled(client, current_intent):
 
     assert response.status_code == 502
     assert "provider is unavailable" in response.json()["error"]
+
+
+@pytest.mark.anyio
+async def test_agriculture_intent_routes_to_deterministic_tool_and_keeps_evidence():
+    class Provider:
+        async def classify(self, message):
+            return ChatIntentResult(intent=ChatIntent.UNKNOWN)
+    llm = LLMService(provider=Provider())
+    intent = await llm.classify("Can I spray my crop tomorrow in Nashik?")
+    assert intent.intent == ChatIntent.AGRICULTURE
+    assert intent.city == "Nashik"
+    assert intent.agriculture_activity == AgricultureActivity.SPRAYING
+
+    advice = AgricultureAdviceResponse(status="available", location={"query": "Nashik", "city": "Nashik", "latitude": 20.01, "longitude": 73.79, "source": "OpenWeatherMap", "status": "resolved"}, recommendation=AgricultureRecommendation(activity="spraying", condition="wind_caution", recommendation="Forecast wind may increase drift risk; check local conditions.", evidence=[{"label": "Forecast wind speed", "value": 28.8, "unit": "km/h", "source": "OpenWeatherMap"}], sources=["OpenWeatherMap"], confidence="moderate", limitations=["Weather-based guidance only."]))
+    classifier = Mock()
+    classifier.classify = AsyncMock(return_value=ChatIntentResult(intent=ChatIntent.AGRICULTURE, city="Nashik", agriculture_activity="spraying"))
+    classifier.explain_agriculture = AsyncMock(return_value="Forecast wind may increase drift risk; check local conditions.")
+    tool = AsyncMock(return_value=advice)
+    reply = await WeatherAgent(llm_service=classifier, agriculture_tool=tool).answer("Can I spray tomorrow in Nashik?")
+    assert reply.intent == ChatIntent.AGRICULTURE
+    assert reply.tool_used == "get_agriculture_advice"
+    assert reply.agriculture_data["recommendation"]["evidence"][0]["value"] == 28.8
+    assert "not an official agricultural department advisory" in reply.message
+    tool.assert_awaited_once_with("Nashik", AgricultureActivity.SPRAYING)
+
+
+@pytest.mark.anyio
+async def test_agriculture_chat_clarifies_missing_location_and_never_calls_tool():
+    llm = Mock()
+    llm.classify = AsyncMock(return_value=ChatIntentResult(intent=ChatIntent.AGRICULTURE, agriculture_activity="irrigation"))
+    tool = AsyncMock()
+    reply = await WeatherAgent(llm_service=llm, agriculture_tool=tool).answer("Should I irrigate today?")
+    assert "Which city or coordinates" in reply.message
+    assert reply.agriculture_data is None
+    tool.assert_not_awaited()
 
 
 @pytest.mark.anyio

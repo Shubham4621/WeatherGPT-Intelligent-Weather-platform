@@ -1,0 +1,2 @@
+date,latitude,longitude,rainfall_mm,source,dataset,grid_resolution
+2024-01-01,21,74.75,,IMD,test,0.25

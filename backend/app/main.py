@@ -7,7 +7,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.routes import chat, health, weather
+from app.api.routes import agriculture, chat, health, weather
 from app.core.config import settings
 from app.core.exceptions import WeatherAPIError, WeatherProviderError
 from app.core.logging import get_logger
@@ -107,6 +107,8 @@ def create_app() -> FastAPI:
         weather.router,
         prefix=settings.API_V1_PREFIX,
     )
+    app.include_router(weather.location_router, prefix=settings.API_V1_PREFIX)
+    app.include_router(agriculture.router, prefix=settings.API_V1_PREFIX)
 
     return app
 

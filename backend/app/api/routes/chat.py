@@ -15,4 +15,4 @@ def get_weather_agent() -> WeatherAgent:
 @router.post("", response_model=ChatResponse)
 async def chat(request: ChatRequest, agent: WeatherAgent = Depends(get_weather_agent)) -> ChatResponse:
     """Answer a supported current-weather question using live provider data."""
-    return await agent.answer(request.message, language=request.language) if request.language != "en" else await agent.answer(request.message)
+    return await agent.answer(request.message, language=request.language)

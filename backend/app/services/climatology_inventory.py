@@ -69,7 +69,7 @@ def inspect_climatology_file(path: str | Path, root: str | Path) -> dict[str, An
         "product_code": product, "month": month_name.lower(), "month_number": MONTHS[month_name.lower()],
         "file_month_attribute_zero_based": reported_month,
         "month_attribute_matches_filename": reported_month == MONTHS[month_name.lower()] - 1,
-        "climatology_period": "30 years (exact start/end years not encoded)",
+        "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
         "resolution_degrees": coordinate_info(longitudes).get("step_degrees"),
         "units": attrs.get("units"), "variable_names": list(variables), "data_variable": name,
         "data_dimensions": variables[name]["dimensions"], "data_shape": variables[name]["shape"],
@@ -98,7 +98,7 @@ def build_climatology_inventory(root: str | Path) -> dict[str, Any]:
                           "unique_month_count": len(months)} for key, months in sorted(groups.items())}
     return {"catalog_title": "Locally supplied IMD gridded climatology metadata inventory",
             "inspection_is_metadata_only": True,
-            "period_note": "The files declare a 30-year climatology; exact baseline years are not encoded in inspected metadata.",
+            "period_note": "IMD confirmed the climatology baseline is 1991-2020; NetCDF attributes identify a 30-year calculation.",
             "file_count": len(entries), "month_completeness": completeness, "files": entries}
 
 

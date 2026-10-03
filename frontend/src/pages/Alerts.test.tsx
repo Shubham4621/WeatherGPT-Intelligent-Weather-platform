@@ -42,8 +42,8 @@ describe('Alerts page', () => {
     render(<Alerts/>);
     fireEvent.click(screen.getByRole('button', { name: 'Search' }));
     expect(screen.getByRole('status')).toHaveTextContent('Loading alerts');
-    finish(new Response(JSON.stringify({ error: 'WEATHER_ALERT_PROVIDER_UNAVAILABLE' }), { status: 503 }));
-    expect(await screen.findByRole('alert')).toHaveTextContent(/Unable to retrieve official weather warnings/i);
+    finish(new Response(JSON.stringify({ error: 'WEATHER_ALERT_PROVIDER_UNAVAILABLE', status: 'unavailable', source: 'IMD', reason: 'provider_authorization_required', message: 'Official warning lookup unavailable.' }), { status: 503 }));
+    expect(await screen.findByRole('alert')).toHaveTextContent(/IMD requires provider authorization/i);
   });
 
   it('supports city search and Alerts navigation', async () => {

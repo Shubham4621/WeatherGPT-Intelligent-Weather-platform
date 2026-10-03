@@ -9,6 +9,8 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from app.services.location_service import find_maharashtra_district_in_text
+
 SUPPORTED_LANGUAGES = {"en": "English", "mr": "मराठी", "hi": "हिन्दी"}
 
 
@@ -29,7 +31,7 @@ _CITIES = {
 def _indic_question(message: str, language: str) -> tuple[str, str | None]:
     """Return an English routing phrase and explicit city for common supported queries."""
     text = message.casefold()
-    city = next((canonical for token, canonical in _CITIES.items() if token.casefold() in text), None)
+    city = find_maharashtra_district_in_text(message) or next((canonical for token, canonical in _CITIES.items() if token.casefold() in text), None)
     if any(term in text for term in ("à¤®à¤¾à¤—à¤šà¥à¤¯à¤¾", "à¤®à¤¾à¤—à¥€à¤²", "à¤ªà¤¿à¤›à¤²à¥‡", "à¤ªà¥à¤°à¤¾à¤¨à¤¾", "à¤‡à¤¤à¤¿à¤¹à¤¾à¤¸")):
         return ("historical rainfall in " + city if city else "historical weather", city)
     travel = any(x in text for x in ("प्रवास", "यात्रा", "travel", "जाना चाहिए"))
@@ -67,6 +69,18 @@ _TEXT = {
         "forecast": "{label} {place} येथे तापमान साधारण {min}°C ते {max}°C दरम्यान राहण्याची शक्यता आहे. अंदाजानुसार {condition}{rain}.",
         "rain": ", पावसाची शक्यता साधारण {value}% आहे",
         "title_forecast": "{place} साठी हवामानाचा अंदाज: {items}.",
+        "history_unavailable": "{place} साठी विनंती केलेल्या कालावधीतील प्रमाणित ऐतिहासिक पावसाची निरीक्षणे उपलब्ध नाहीत. उपलब्ध नसलेली मूल्ये मी अंदाजाने देत नाही.",
+        "history_rainfall": "{place} येथे {period} दरम्यान {amount} mm पावसाची निरीक्षणे {count} उपलब्ध दैनिक नोंदींवर आधारित आहेत.",
+        "history_trend": "{place} साठी वर्णनात्मक ऐतिहासिक पाऊस कल {slope} mm/वर्ष आहे; {start} ते {end} या कालावधीतील {count} वार्षिक निरीक्षणांवर आधारित. हा वर्णनात्मक कल आहे, अंदाज किंवा सांख्यिकीय महत्त्वाचा दावा नाही.",
+        "history_trend_insufficient": "{place} साठी ऐतिहासिक पावसाचा कल मोजण्यासाठी पुरेशी वार्षिक निरीक्षणे उपलब्ध नाहीत ({count}; आवश्यक किमान {minimum}).",
+        "history_comparison": "{place} मध्ये {first_year} मध्ये {first} mm आणि {second_year} मध्ये {second} mm पाऊस नोंदला गेला; फरक {difference} mm आहे.",
+        "history_normal": "{place} येथे {period} मध्ये {observed} mm पाऊस नोंदला गेला; {baseline} कालावधीच्या IMD मासिक सामान्यांशी तुलना केल्यास विसंगती {anomaly} mm आहे. ही विश्लेषणात्मक तुलना आहे, अधिकृत इशारा नाही.",
+        "history_wettest": "उपलब्ध ऐतिहासिक निरीक्षणांमध्ये सर्वाधिक पावसाचा महिना {period} होता: {amount} mm.",
+        "history_driest": "उपलब्ध ऐतिहासिक निरीक्षणांमध्ये सर्वात कमी पावसाचा महिना {period} होता: {amount} mm.",
+        "climatology": "{place} साठी {period} चा IMD {variable} हवामान सामान्य {normal} {units} आहे (आधार कालावधी {baseline}; मूळ ग्रिड रिझोल्यूशन {resolution}°). हे हवामान सामान्य आहे, निरीक्षण, अंदाज किंवा इशारा नाही.",
+        "climatology_unavailable": "{place} साठी विनंती केलेले IMD हवामान सामान्य उपलब्ध नाही. उपलब्ध नसलेले मूल्य मी अंदाजाने देत नाही.",
+        "nwp_unavailable": "{place} साठी NWP मॉडेल माहिती उपलब्ध नाही. त्याऐवजी कार्यकारी अंदाज किंवा WeatherGPT भविष्यवाणी वापरलेली नाही.",
+        "nwp_available": "{place} साठी {model} मॉडेल मार्गदर्शन उपलब्ध आहे. प्रारंभ वेळ: {run}; वैध कालावधी: {start} ते {end}; स्रोत: {source}; मूळ ग्रिड रिझोल्यूशन: {resolution}°. हे मॉडेल मार्गदर्शन आहे, निरीक्षण, अधिकृत इशारा किंवा WeatherGPT भविष्यवाणी नाही.",
         "alert_title": "अधिकृत IMD हवामान इशारा",
         "alert_row": "{date}: {warnings}; IMD स्तर: {severity}",
         "alert_source": "अधिकृत इशारा स्रोत",
@@ -101,6 +115,18 @@ _TEXT = {
         "forecast": "{label} {place} में तापमान लगभग {min}°C से {max}°C के बीच रहने की संभावना है। पूर्वानुमान में {condition}{rain}।",
         "rain": ", बारिश की संभावना लगभग {value}% है",
         "title_forecast": "{place} का मौसम पूर्वानुमान: {items}।",
+        "history_unavailable": "{place} के लिए अनुरोधित अवधि में सत्यापित ऐतिहासिक वर्षा अवलोकन उपलब्ध नहीं हैं। अनुपलब्ध मान अनुमान से नहीं दिए जाएँगे।",
+        "history_rainfall": "{place} में {period} के दौरान {count} उपलब्ध दैनिक रिकॉर्ड के आधार पर {amount} mm वर्षा दर्ज हुई।",
+        "history_trend": "{place} के लिए वर्णनात्मक ऐतिहासिक वर्षा प्रवृत्ति {slope} mm/वर्ष है; यह {start} से {end} तक के {count} वार्षिक अवलोकनों पर आधारित है। यह वर्णनात्मक ढलान है, पूर्वानुमान या सांख्यिकीय महत्व का दावा नहीं।",
+        "history_trend_insufficient": "{place} के लिए ऐतिहासिक वर्षा प्रवृत्ति निकालने हेतु पर्याप्त वार्षिक अवलोकन उपलब्ध नहीं हैं ({count}; न्यूनतम आवश्यक {minimum})।",
+        "history_comparison": "{place} में {first_year} में {first} mm और {second_year} में {second} mm वर्षा दर्ज हुई; अंतर {difference} mm है।",
+        "history_normal": "{place} में {period} के दौरान {observed} mm वर्षा दर्ज हुई; {baseline} अवधि के IMD मासिक सामान्य से तुलना करने पर विसंगति {anomaly} mm है। यह विश्लेषणात्मक तुलना है, आधिकारिक चेतावनी नहीं।",
+        "history_wettest": "उपलब्ध ऐतिहासिक अवलोकनों में सबसे अधिक वर्षा वाला महीना {period} था: {amount} mm।",
+        "history_driest": "उपलब्ध ऐतिहासिक अवलोकनों में सबसे कम वर्षा वाला महीना {period} था: {amount} mm।",
+        "climatology": "{place} के लिए {period} का IMD {variable} जलवायु सामान्य {normal} {units} है (आधार अवधि {baseline}; मूल ग्रिड रिज़ॉल्यूशन {resolution}°)। यह जलवायु सामान्य है, अवलोकन, पूर्वानुमान या चेतावनी नहीं।",
+        "climatology_unavailable": "{place} के लिए अनुरोधित IMD जलवायु सामान्य उपलब्ध नहीं है। अनुपलब्ध मान अनुमान से नहीं दिया जाएगा।",
+        "nwp_unavailable": "{place} के लिए NWP मॉडल डेटा उपलब्ध नहीं है। इसके स्थान पर परिचालन पूर्वानुमान या WeatherGPT भविष्यवाणी का उपयोग नहीं किया गया।",
+        "nwp_available": "{place} के लिए {model} मॉडल मार्गदर्शन उपलब्ध है। आरंभ समय: {run}; वैध अवधि: {start} से {end}; स्रोत: {source}; मूल ग्रिड रिज़ॉल्यूशन: {resolution}°। यह मॉडल मार्गदर्शन है, अवलोकन, आधिकारिक चेतावनी या WeatherGPT भविष्यवाणी नहीं।",
         "alert_title": "आधिकारिक IMD मौसम चेतावनी",
         "alert_row": "{date}: {warnings}; IMD स्तर: {severity}",
         "alert_source": "आधिकारिक चेतावनी स्रोत",
@@ -138,6 +164,23 @@ def _translate_condition(value: str, language: str) -> str:
     return _TEXT[language].get(key, value) if key else value
 
 
+_MONTH_NAMES = {
+    "mr": ("", "जानेवारी", "फेब्रुवारी", "मार्च", "एप्रिल", "मे", "जून", "जुलै", "ऑगस्ट", "सप्टेंबर", "ऑक्टोबर", "नोव्हेंबर", "डिसेंबर"),
+    "hi": ("", "जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"),
+}
+
+
+def _localized_month(month: Any, language: str) -> str:
+    try:
+        return _MONTH_NAMES[language][int(month)]
+    except (KeyError, IndexError, TypeError, ValueError):
+        return str(month)
+
+
+def _value(value: Any) -> str:
+    return "unavailable" if value is None else str(value)
+
+
 def localize_chat_response(response: Any, language: str) -> Any:
     """Translate deterministic chat presentation while retaining typed values/source."""
     language = validate_language(language)
@@ -149,11 +192,103 @@ def localize_chat_response(response: Any, language: str) -> Any:
     if response.location is None and "which city or district" in message.casefold():
         return response.model_copy(update={"message": t["ask_city"]})
     if intent == "HISTORICAL_WEATHER":
-        city = response.location or ""
-        if language == "mr":
-            message = f"{city} साठी ऐतिहासिक हवामान माहिती उपलब्ध नाही. विश्वसनीय ऐतिहासिक हवामान डेटा स्रोत कॉन्फिगर केलेला नाही, त्यामुळे ऐतिहासिक मोजमाप देता येत नाही."
+        from calendar import month_name
+
+        facts = response.historical_data or {}
+        place = response.location or ""
+        source = facts.get("source") or response.source
+        if facts.get("kind") == "CLIMATOLOGY":
+            if facts.get("status") != "available" or facts.get("normal") is None:
+                message = t["climatology_unavailable"].format(place=place)
+            else:
+                month = facts.get("month")
+                period = _localized_month(month, language)
+                variable = {"rainfall": "पर्जन्य" if language == "mr" else "वर्षा", "tmax": "कमाल तापमान" if language == "mr" else "अधिकतम तापमान", "tmin": "किमान तापमान" if language == "mr" else "न्यूनतम तापमान"}.get(facts.get("variable"), str(facts.get("variable", "")))
+                message = t["climatology"].format(place=place, period=period, variable=variable,
+                    normal=_value(facts.get("normal")), units=facts.get("units", ""), baseline=facts.get("baseline", ""),
+                    resolution=_value(facts.get("resolution_degrees")))
+        elif facts.get("status") not in {"available", "partial"}:
+            message = t["history_unavailable"].format(place=place)
+        elif facts.get("analysis_kind") == "trend":
+            trend = facts.get("trend") or {}
+            if trend.get("status") == "available":
+                message = t["history_trend"].format(place=place, slope=_value(trend.get("slope_per_year")),
+                    start=_value(trend.get("period_start")), end=_value(trend.get("period_end")), count=_value(trend.get("observations")))
+            else:
+                message = t["history_trend_insufficient"].format(place=place, count=_value(trend.get("observations")), minimum=_value(trend.get("minimum_observations")))
+        elif facts.get("analysis_kind") == "year_comparison" and facts.get("year_comparison"):
+            comparison = facts["year_comparison"]
+            message = t["history_comparison"].format(place=place, first_year=_value(comparison.get("first_year")),
+                first=_value(comparison.get("first_rainfall_mm")), second_year=_value(comparison.get("second_year")),
+                second=_value(comparison.get("second_rainfall_mm")), difference=_value(comparison.get("difference_mm")))
+        elif facts.get("analysis_kind") == "normal_comparison" and facts.get("annual_climatology", {}).get("status") == "available":
+            comparison = facts["annual_climatology"]
+            message = t["history_normal"].format(place=place, period=_value(comparison.get("year")),
+                observed=_value(comparison.get("observed_mm")), baseline=_value(comparison.get("baseline")),
+                anomaly=_value(comparison.get("anomaly_mm")))
+        elif facts.get("analysis_kind") in {"wettest", "driest"} and facts.get("selected_month"):
+            selected = facts["selected_month"]
+            period = f"{_localized_month(selected.get('month_number'), language)} {selected.get('year')}"
+            message = t["history_wettest" if facts["analysis_kind"] == "wettest" else "history_driest"].format(
+                period=period, amount=_value(selected.get("total_rainfall")))
         else:
-            message = f"{city} के लिए ऐतिहासिक मौसम डेटा उपलब्ध नहीं है। विश्वसनीय ऐतिहासिक मौसम प्रदाता कॉन्फ़िगर नहीं है, इसलिए माप नहीं दिए जा सकते।"
+            summary = facts.get("summary") or {}
+            period_data = facts.get("requested_period") or {}
+            start_text, end_text = period_data.get("start"), period_data.get("end")
+            years = facts.get("requested_years") or []
+            if len(years) == 1:
+                period = str(years[0])
+            elif facts.get("requested_month"):
+                period = f"{_localized_month(facts['requested_month'], language)} {start_text[:4] if start_text else ''}".strip()
+            elif start_text and end_text:
+                period = f"{start_text}–{end_text}"
+            else:
+                period = f"{summary.get('period_start', '')}–{summary.get('period_end', '')}"
+            message = t["history_rainfall"].format(place=place, period=period,
+                amount=_value(summary.get("total_rainfall")), count=_value(summary.get("rainfall_observations")))
+        if source:
+            message += f"\n{t['sources']} {source}"
+        return response.model_copy(update={"message": message})
+    if intent == "AGRICULTURE" and response.agriculture_data:
+        data = response.agriculture_data
+        recommendation = data.get("recommendation") or {}
+        activity = str(recommendation.get("activity", "general"))
+        condition = str(recommendation.get("condition", "insufficient_data"))
+        activities = {
+            "irrigation": ("सिंचन नियोजन", "सिंचाई योजना"), "sowing": ("पेरणी मार्गदर्शन", "बुवाई मार्गदर्शन"),
+            "spraying": ("फवारणीसाठी हवामान", "छिड़काव का मौसम"), "harvesting": ("कापणी", "कटाई"),
+            "field_operations": ("शेतातील कामे", "खेत के काम"), "heat_stress": ("पीक/हवामान उष्णतेची चिंता", "फसल/मौसम गर्मी की चिंता"),
+            "heavy_rain": ("पावसाबाबत चिंता", "वर्षा की चिंता"), "wind_risk": ("वाऱ्याबाबत चिंता", "हवा की चिंता"),
+            "general": ("सामान्य शेती हवामान", "सामान्य कृषि मौसम"),
+        }
+        recommendations = {
+            "rain_may_reduce_need": ("अंदाज किंवा GFS मध्ये पावसाची शक्यता दिसते; त्यामुळे तातडीच्या सिंचनाची गरज कमी होऊ शकते. निर्णयापूर्वी मातीतील ओलावा आणि पिकाची गरज तपासा.", "पूर्वानुमान या GFS में बारिश की संभावना है; इससे तुरंत सिंचाई की जरूरत कम हो सकती है। निर्णय से पहले मिट्टी की नमी और फसल की जरूरत जाँचें।"),
+            "monitor_soil_moisture": ("मातीतील ओलाव्याचे किंवा अलीकडील पावसाचे पुरेसे मोजमाप उपलब्ध नाही. शेतातील ओलावा तपासा; पिकाच्या आणि शेताच्या स्थितीनुसार सिंचन ठरवा.", "मिट्टी की नमी या हाल की वर्षा का पर्याप्त माप उपलब्ध नहीं है। खेत की नमी जाँचें और फसल व खेत की स्थिति के अनुसार सिंचाई तय करें।"),
+            "unfavorable_weather_signal": ("उपलब्ध माहितीमध्ये पाऊस, जोरदार वारा किंवा जास्त तापमानाचा संकेत आहे; फवारणी पुढे ढकलण्याचा विचार करा आणि उत्पादनाच्या लेबल व स्थानिक सुरक्षितता मार्गदर्शनाचे पालन करा.", "उपलब्ध जानकारी में बारिश, तेज हवा या अधिक तापमान का संकेत है; छिड़काव टालने पर विचार करें और उत्पाद लेबल व स्थानीय सुरक्षा मार्गदर्शन का पालन करें।"),
+            "wind_caution": ("अंदाजातील वाऱ्यामुळे फवारणीचा फवारा वाहून जाण्याचा धोका वाढू शकतो; स्थानिक परिस्थिती आणि उत्पादन मार्गदर्शन तपासा.", "पूर्वानुमान की हवा से छिड़काव बहने का जोखिम बढ़ सकता है; स्थानीय स्थिति और उत्पाद निर्देश जाँचें।"),
+            "wet_weather_signal": ("अलीकडील कालावधीच्या अंदाजात ओल्या हवामानाची शक्यता आहे. पीक-विशिष्ट मातीची ओल आणि शेताची स्थिती योग्य असल्यासच पेरणीचा विचार करा.", "हाल की अवधि के पूर्वानुमान में गीले मौसम की संभावना है। फसल के अनुसार मिट्टी की नमी और खेत की स्थिति सही हो तभी बुवाई पर विचार करें।"),
+            "no_rain_signal": ("उपलब्ध अंदाजात पावसाचा ठळक संकेत नाही. पेरणीपूर्वी बीजपेरणीसाठीची मातीची ओल आणि स्थानिक मार्गदर्शन तपासा.", "उपलब्ध पूर्वानुमान में बारिश का मजबूत संकेत नहीं है। बुवाई से पहले बीज-क्षेत्र की नमी और स्थानीय मार्गदर्शन जाँचें।"),
+            "rainfall_concern": ("आगामी पावसाची शक्यता कापणी किंवा शेतातील वाहतुकीवर परिणाम करू शकते; पिकाची परिपक्वता आणि प्रत्यक्ष शेतस्थिती तपासा.", "आने वाली बारिश की संभावना कटाई या खेत तक पहुँच को प्रभावित कर सकती है; फसल की परिपक्वता और वास्तविक खेत स्थिति जाँचें।"),
+            "weather_caution": ("पाऊस किंवा वाढलेला वारा शेतातील कामावर परिणाम करू शकतो; स्थानिक शेतस्थिती आणि प्रवेशयोग्यता तपासा.", "बारिश या तेज हवा खेत के काम को प्रभावित कर सकती है; स्थानीय खेत स्थिति और पहुँच जाँचें।"),
+            "high_weather_heat_concern": ("उच्च हवेचे तापमान पीक/हवामान उष्णतेची चिंता दर्शवते. थंड वेळेत कामाचे नियोजन करा आणि पिकांचे निरीक्षण करा; हा पीक-रोग निदान नाही.", "अधिक वायु तापमान फसल/मौसम गर्मी की चिंता दर्शाता है। ठंडे समय में काम रखें और फसल पर नजर रखें; यह फसल रोग का निदान नहीं है।"),
+            "moderate_weather_heat_concern": ("उबदार तापमानामुळे मध्यम पीक/हवामान उष्णतेची चिंता आहे. पिके आणि शेतस्थितीचे निरीक्षण करा.", "गर्म तापमान से मध्यम फसल/मौसम गर्मी की चिंता है। फसल और खेत की स्थिति पर नजर रखें।"),
+            "high_weather_rainfall_concern": ("GFS ने त्याच्या उपलब्ध रन-ते-वैध-वेळ कालावधीत जास्त संचयी पावसाची चिंता दर्शवली आहे; निचरा आणि शेतातील प्रवेशावर लक्ष ठेवा. हा अधिकृत इशारा नाही.", "GFS ने उपलब्ध रन-से-वैध-समय अवधि में अधिक संचयी वर्षा की चिंता दिखाई है; जलनिकासी और खेत तक पहुँच पर नजर रखें। यह आधिकारिक चेतावनी नहीं है।"),
+            "elevated_weather_wind_concern": ("वाऱ्याचा वेग WeatherGPT च्या वाढीव-चिंता स्क्रीनिंग मर्यादेपेक्षा जास्त आहे; उघड्या शेतातील कामात काळजी घ्या.", "हवा की गति WeatherGPT की बढ़ी हुई चिंता सीमा से अधिक है; खुले खेत में काम करते समय सावधानी रखें।"),
+            "high_weather_wind_concern": ("वाऱ्याचा वेग WeatherGPT च्या उच्च-चिंता स्क्रीनिंग मर्यादेपेक्षा जास्त आहे; हलक्या वस्तू सुरक्षित करा आणि उघड्या शेतस्थिती तपासा.", "हवा की गति WeatherGPT की उच्च चिंता सीमा से अधिक है; हल्की वस्तुएँ सुरक्षित रखें और खुले खेत की स्थिति जाँचें।"),
+            "insufficient_data": ("या शिफारसीसाठी पुरेशी पडताळलेली हवामान मोजमापे उपलब्ध नाहीत; मी अंदाजाने मूल्ये देत नाही.", "इस सलाह के लिए पर्याप्त सत्यापित मौसम माप उपलब्ध नहीं हैं; कोई मान अनुमान से नहीं दिया गया है।"),
+        }
+        place = response.location or ""
+        action = activities.get(activity, activities["general"])[0 if language == "mr" else 1]
+        advice_text = recommendations.get(condition, ("उपलब्ध हवामान माहिती तपासा आणि प्रत्यक्ष शेतस्थितीनुसार काम ठरवा.", "उपलब्ध मौसम जानकारी देखें और वास्तविक खेत स्थिति के अनुसार काम तय करें।"))[0 if language == "mr" else 1]
+        title = "WeatherGPT शेती हवामान सल्ला" if language == "mr" else "WeatherGPT कृषि मौसम सलाह"
+        disclaimer = "हा अधिकृत कृषी विभागाचा सल्ला नाही." if language == "mr" else "यह आधिकारिक कृषि विभाग की सलाह नहीं है।"
+        evidence = recommendation.get("evidence") or []
+        evidence_lines = [f"• {item.get('label')}: {item.get('value')}{(' ' + str(item.get('unit')) if item.get('unit') else '')} ({item.get('source')})" for item in evidence]
+        sources = recommendation.get("sources") or []
+        message = f"{title}\n\n{place} · {action}\n\n{advice_text}\n\n{disclaimer}"
+        if evidence_lines:
+            message += "\n\n" + t["factors"] + "\n" + "\n".join(evidence_lines)
+        message += "\n\n" + t["sources"] + " " + (", ".join(sources) if sources else "उपलब्ध नाही" if language == "mr" else "उपलब्ध नहीं")
         return response.model_copy(update={"message": message})
     if intent == "CURRENT_WEATHER" and response.weather:
         w = response.weather
@@ -207,6 +342,16 @@ def localize_chat_response(response: Any, language: str) -> Any:
             }
             for original, translated in sorted(replacements.items(), key=lambda pair: len(pair[0]), reverse=True):
                 message = message.replace(original, translated)
+    elif intent == "NWP":
+        facts = response.nwp_data or {}
+        place = response.location or ""
+        if facts.get("status") not in {"available", "partial"}:
+            message = t["nwp_unavailable"].format(place=place)
+        else:
+            message = t["nwp_available"].format(place=place, model=facts.get("model", "GFS"),
+                run=_value(facts.get("initialization_time")), start=_value(facts.get("forecast_start")),
+                end=_value(facts.get("forecast_end")), source=facts.get("source", "NOAA/NCEP NOMADS"),
+                resolution=_value(facts.get("resolution_degrees")))
     elif intent == "ADVISORY" and response.advisory:
         a = response.advisory
         import re

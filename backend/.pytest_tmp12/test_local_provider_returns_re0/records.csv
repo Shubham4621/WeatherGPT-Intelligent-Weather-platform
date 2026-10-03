@@ -1,0 +1,2 @@
+date,latitude,longitude,rainfall_mm,temp_max_c,temp_min_c,source,dataset,grid_resolution
+2024-01-01,21,74.75,0,22,12,IMD Pune,test,0.25

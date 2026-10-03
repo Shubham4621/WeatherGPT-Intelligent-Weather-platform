@@ -30,6 +30,17 @@ async def test_alerts_api_provider_unavailable_is_not_no_warning(client, monkeyp
 
 
 @pytest.mark.anyio
+async def test_alerts_api_preserves_machine_readable_authorization_reason(client, monkeypatch):
+    from app.services.imd_alert_service import AlertProviderUnavailable
+    monkeypatch.setattr(imd_alert_service, "get_alerts", AsyncMock(side_effect=AlertProviderUnavailable("provider_authorization_required")))
+    response = await client.get("/api/v1/weather/alerts?city=Dhule")
+    assert response.status_code == 503
+    assert response.json()["status"] == "unavailable"
+    assert response.json()["source"] == "IMD"
+    assert response.json()["reason"] == "provider_authorization_required"
+
+
+@pytest.mark.anyio
 async def test_alerts_api_unsupported_city(client):
     response = await client.get("/api/v1/weather/alerts?city=Nashik")
     assert response.status_code == 422 and response.json()["error"] == "UNSUPPORTED_LOCATION"

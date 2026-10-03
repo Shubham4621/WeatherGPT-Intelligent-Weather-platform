@@ -22,7 +22,7 @@ def test_inspection_reports_valid_file_size_and_unresolved_encoding_without_deco
     assert report["size_matches_documented_layout"] is True
     assert report["expected_daily_records"] == 366
     assert report["grid_dimensions"] == [31, 31]
-    assert report["float32_width_supported_by_documented_record"] is True
+    assert report["four_byte_value_width_documented"] is True
     assert report["values_decoded"] is False
     assert report["byte_order"] == "UNVERIFIED"
     assert report["raw_ij_to_geographic_axis_mapping"] == "UNVERIFIED"

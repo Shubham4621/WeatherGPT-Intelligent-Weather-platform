@@ -26,7 +26,7 @@ export default function WeatherSearch({ city, loading, onCityChange, onSearch }:
           name="city"
           type="search"
           autoComplete="address-level2"
-          placeholder={`${t(language, 'Search')} · Dhule`}
+          placeholder={t(language, 'Search weather by city')}
           value={city}
           onChange={(event) => onCityChange(event.target.value)}
           disabled={loading}

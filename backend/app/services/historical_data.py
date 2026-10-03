@@ -1,14 +1,14 @@
 """IMD historical grid metadata, extraction and validation helpers.
 
 This module never downloads data. Readers only open paths explicitly supplied by
-the caller, and binary grid decoding requires the grid layout to be provided.
+the caller. IMD daily temperature GRD decoding remains blocked until its format
+is authoritative and a validated temperature decoder is implemented.
 """
 from __future__ import annotations
 
 import csv
 import math
 import re
-import struct
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
@@ -51,8 +51,8 @@ class GridDatasetMetadata:
 
 IMD_DATASETS: dict[str, GridDatasetMetadata] = {
     "rainfall": GridDatasetMetadata("India Meteorological Department (IMD Pune)", "Daily Gridded Rainfall", "rainfall_mm", .25, 1901, 2024, "mm", 6.5, 38.5, 66.5, 100.0, (-999.0,), RAIN_URL, "NetCDF or IMD binary grid", 129, 135),
-    "tmax": GridDatasetMetadata("India Meteorological Department (IMD Pune)", "Daily Gridded Maximum Temperature", "temp_max_c", 1.0, 1951, 2024, "°C", 7.5, 37.5, 67.5, 97.5, (99.9, -999.0), TMAX_URL, "IMD direct-access binary grid", 31, 31),
-    "tmin": GridDatasetMetadata("India Meteorological Department (IMD Pune)", "Daily Gridded Minimum Temperature", "temp_min_c", 1.0, 1951, 2024, "°C", 7.5, 37.5, 67.5, 97.5, (99.9, -999.0), TMIN_URL, "IMD direct-access binary grid", 31, 31),
+    "tmax": GridDatasetMetadata("India Meteorological Department (IMD Pune)", "Daily Gridded Maximum Temperature", "temp_max_c", 1.0, 1951, 2024, "°C", 7.5, 37.5, 67.5, 97.5, (99.9,), TMAX_URL, "IMD direct-access binary grid", 31, 31),
+    "tmin": GridDatasetMetadata("India Meteorological Department (IMD Pune)", "Daily Gridded Minimum Temperature", "temp_min_c", 1.0, 1951, 2024, "°C", 7.5, 37.5, 67.5, 97.5, (99.9,), TMIN_URL, "IMD direct-access binary grid", 31, 31),
 }
 
 
@@ -364,42 +364,43 @@ def _read_netcdf3_point(netcdf_file: Any, path: str | Path, metadata: GridDatase
 def read_binary_grid_point(path: str | Path, dataset_type: str, latitude: float, longitude: float,
                            *, year: int, byte_order: str, cell_order: str,
                            values_per_day: int | None = None) -> list[dict[str, Any]]:
-    """Decode explicit float32 daily grids; caller must supply official file layout.
+    """Fail closed for IMD daily temperature grids until decoding is authorized.
 
-    This deliberately does not guess IMD headers, endian order, or packed formats.
-    Both byte_order and cell_order must be explicitly confirmed by authoritative
-    metadata. Do not call for IMD GRD files while either remains unknown.
+    Legacy callers may still pass layout arguments, but caller-supplied byte
+    order/cell order are not authoritative evidence. The payload reader remains
+    disabled in this preparation phase.
     """
     if dataset_type not in {"tmax", "tmin"} or byte_order not in {"<", ">"}:
         raise ValueError("binary grid requires dataset_type tmax/tmin and byte_order '<' or '>'")
     if cell_order != "latitude_rows_longitude_fastest":
         raise ValueError("cell_order must be explicitly confirmed as 'latitude_rows_longitude_fastest'")
-    metadata = IMD_DATASETS[dataset_type]
-    point = nearest_grid_point(latitude, longitude, dataset_type)
-    row = round((point.latitude - metadata.min_latitude) / metadata.resolution)
-    col = round((point.longitude - metadata.min_longitude) / metadata.resolution)
-    per_day = values_per_day or metadata.rows * metadata.columns
-    if per_day < metadata.rows * metadata.columns:
-        raise ValueError("declared binary grid has fewer cells than the IMD grid")
-    raw = Path(path).read_bytes()
-    record_bytes = per_day * 4
-    if len(raw) % record_bytes:
-        raise ValueError("binary file size does not match the declared float32 grid layout")
-    day_count = len(raw) // record_bytes
-    year_start = date(year, 1, 1)
-    max_days = (date(year + 1, 1, 1) - year_start).days
-    if day_count != max_days:
-        raise ValueError(f"expected {max_days} daily grids for {year}, found {day_count}")
-    cell = row * metadata.columns + col
-    fmt = f"{byte_order}{per_day}f"
-    output = []
-    for offset in range(day_count):
-        vals = struct.unpack_from(fmt, raw, offset * record_bytes)
-        output.append({"date": (year_start + timedelta(days=offset)).isoformat(),
-                       "latitude": point.grid_latitude, "longitude": point.grid_longitude,
-                       "requested_latitude": point.requested_latitude, "requested_longitude": point.requested_longitude,
-                       "distance_km": point.distance_km, "source": metadata.source, "dataset": metadata.dataset,
-                       "grid_resolution": metadata.resolution,
-                       metadata.variable: normalize_missing(vals[cell], dataset_type)})
-    return output
+    # This legacy generic decoder accepts caller-supplied layout arguments, but
+    # those arguments alone are not authoritative evidence for IMD temperature
+    # GRDs. Keep it fail-closed until the shared temperature spec is verified
+    # and an explicitly validated temperature decoder is implemented.
+    from app.services.imd_temperature_pipeline import (
+        IMD_TEMPERATURE_FORMAT, TemperatureDecodeBlocked, temperature_format_blockers,
+    )
+    try:
+        format_blockers = temperature_format_blockers(IMD_TEMPERATURE_FORMAT)
+    except (TypeError, ValueError, AttributeError) as exc:
+        raise TemperatureDecodeBlocked(
+            "IMD temperature GRD decoding is blocked before payload access; "
+            f"format configuration is invalid: {exc}",
+            reason_code="BLOCKED_FORMAT_CONFIGURATION_INVALID",
+            details={"configuration_error": str(exc)},
+        ) from exc
+    if format_blockers:
+        raise TemperatureDecodeBlocked(
+            "IMD temperature GRD decoding is blocked before payload access; "
+            f"unverified format fields: {', '.join(format_blockers)}.",
+            reason_code="BLOCKED_FORMAT_FIELDS_UNVERIFIED",
+            details={"unverified_fields": format_blockers},
+        )
+    raise TemperatureDecodeBlocked(
+        "IMD temperature GRD decoding remains disabled until its decoder is "
+        "implemented and separately validated.",
+        reason_code="BLOCKED_DECODER_NOT_IMPLEMENTED",
+        details={"payload_read": False},
+    )
 

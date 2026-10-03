@@ -42,7 +42,7 @@ export interface ForecastResponse { location: WeatherLocation; forecast: Forecas
 
 export interface AlertWarning { warning_type: string; warning_code: number }
 export interface AlertDay { date: string; warnings: AlertWarning[]; warning_codes: number[]; severity: string | null; severity_code: number | null; is_active: boolean }
-export interface WeatherAlertsResponse { location: string; district: string; state: string; issued_at: string; forecast_days: AlertDay[]; source: string; source_url: string }
+export interface WeatherAlertsResponse { location: string; district: string; state: string; issued_at: string; forecast_days: AlertDay[]; source: string; source_url: string; provider_status?: 'available'; official?: boolean; retrieved_at?: string | null; reference?: string | null }
 
 export type AdvisoryActivity = 'TRAVEL' | 'OUTDOOR_ACTIVITY' | 'COMMUTE' | 'EXERCISE' | 'EVENT' | 'AGRICULTURE' | 'GENERAL_PRECAUTION';
 export interface AdvisoryFactor { code: string; detail: string; source: string }

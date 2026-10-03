@@ -10,9 +10,10 @@ import argparse
 import json
 import math
 import re
-from datetime import date, datetime, timezone
+from dataclasses import dataclass
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from app.services.historical_data import NormalizedHistoricalRecord, nearest_grid_point
 from app.services.imd_grd_inspection import (
@@ -31,15 +32,170 @@ REFERENCE_URLS = {
     "tmin": "https://imdpune.gov.in/cmpg/Griddata/Min_1_Bin.html",
 }
 LOCAL_TEMPERATURE_PDF = "data/raw/imd_temperature/IMD-DSP_temp.pdf"
-UNRESOLVED_FORMAT_FIELDS = (
-    "byte_order", "explicit_float_representation (for example, IEEE-754)",
-    "raw_IJ_to_latitude_longitude_mapping", "header_or_prefix_structure",
+FORMAT_CRITICAL_FIELDS = (
+    "numeric_representation", "byte_order", "raw_ij_mapping", "record_framing",
 )
+UNRESOLVED_FORMAT_FIELDS = FORMAT_CRITICAL_FIELDS
 _FILE_PATTERN = re.compile(r"^(Maxtemp_MaxT|Mintemp_MinT)_(\d{4})\.GRD$", re.IGNORECASE)
 
 
 class TemperatureDecodeBlocked(RuntimeError):
-    """Raised before reading values when GRD decoding semantics are unverified."""
+    """Raised before reading values when GRD decoding is not safe to enable."""
+
+    def __init__(self, message: str, *, reason_code: str = "BLOCKED_FORMAT_FIELDS_UNVERIFIED",
+                 details: dict[str, Any] | None = None):
+        super().__init__(message)
+        self.reason_code = reason_code
+        self.details = details or {}
+
+
+@dataclass(frozen=True)
+class RawIJMapping:
+    """Explicit raw I/J axis mapping; None is retained until IMD confirms it."""
+
+    i_axis: Literal["latitude", "longitude"]
+    i_direction: Literal["ascending", "descending"]
+    j_axis: Literal["latitude", "longitude"]
+    j_direction: Literal["ascending", "descending"]
+    i_index_origin: Literal[0, 1] | None = None
+    j_index_origin: Literal[0, 1] | None = None
+    fastest_index: Literal["i", "j"] | None = None
+
+
+@dataclass(frozen=True)
+class TemperatureFormatEvidence:
+    """Authoritative evidence attached to one configured decoder property."""
+
+    field: str
+    authority: Literal["IMD"]
+    source: str
+    statement: str
+
+
+@dataclass(frozen=True)
+class TemperatureGrdFormatSpec:
+    """Known IMD layout plus explicitly unset encoding properties.
+
+    The defaults below record only established metadata. In particular, they do
+    not infer a numeric representation, byte order, or mapping from raw I/J to
+    geographic coordinates.
+    """
+
+    numeric_representation: str | None = None
+    byte_order: Literal["little", "big"] | None = None
+    raw_ij_mapping: RawIJMapping | None = None
+    record_framing: str | None = None
+    field_evidence: tuple[TemperatureFormatEvidence, ...] = ()
+    grid_rows: int = GRID_ROWS
+    grid_columns: int = GRID_COLUMNS
+    bytes_per_value: int = 4
+    units: Literal["°C"] = "°C"
+    missing_marker: float = UNDEFINED_VALUE
+    record_date_mapping: Literal["jan1_then_sequential_days"] = "jan1_then_sequential_days"
+
+
+# This is the production specification. Its unresolved fields must remain None
+# until authoritative IMD clarification and field-specific evidence are added.
+IMD_TEMPERATURE_FORMAT = TemperatureGrdFormatSpec()
+
+
+def validate_temperature_format_spec(spec: TemperatureGrdFormatSpec) -> None:
+    """Validate an explicitly supplied format configuration, without decoding.
+
+    A successful result means the values are internally consistent. It does
+    not establish that the values describe IMD files or authorize file reads.
+    """
+    problems: list[str] = []
+    if not isinstance(spec, TemperatureGrdFormatSpec):
+        raise ValueError("spec must be a TemperatureGrdFormatSpec")
+    if (spec.numeric_representation is not None
+            and (not isinstance(spec.numeric_representation, str) or not spec.numeric_representation.strip())):
+        problems.append("numeric_representation must be a non-empty explicit string when supplied")
+    if spec.byte_order is not None and spec.byte_order not in ("little", "big"):
+        problems.append("byte_order must be 'little' or 'big'")
+    mapping = spec.raw_ij_mapping
+    if mapping is not None and not isinstance(mapping, RawIJMapping):
+        problems.append("raw_ij_mapping must be a RawIJMapping")
+    elif mapping is not None and (mapping.i_axis == mapping.j_axis
+          or mapping.i_axis not in ("latitude", "longitude")
+          or mapping.j_axis not in ("latitude", "longitude")
+          or mapping.i_direction not in ("ascending", "descending")
+          or mapping.j_direction not in ("ascending", "descending")
+          or mapping.i_index_origin not in (0, 1)
+          or mapping.j_index_origin not in (0, 1)
+          or mapping.fastest_index not in ("i", "j")):
+        problems.append(
+            "raw_ij_mapping must define distinct axes, directions, index origins, and storage-fastest index"
+        )
+    if spec.record_framing is not None and (
+            not isinstance(spec.record_framing, str) or not spec.record_framing.strip()):
+        problems.append("record_framing must be a non-empty explicit string when supplied")
+    if spec.grid_rows != GRID_ROWS or spec.grid_columns != GRID_COLUMNS:
+        problems.append("grid dimensions must match the documented 31 by 31 layout")
+    if spec.bytes_per_value != 4:
+        problems.append("bytes_per_value must match the documented four-byte value width")
+    if spec.units != "°C":
+        problems.append("units must match the documented Celsius unit")
+    if (not isinstance(spec.missing_marker, (int, float))
+            or not math.isfinite(spec.missing_marker)
+            or not math.isclose(spec.missing_marker, UNDEFINED_VALUE)):
+        problems.append("missing_marker must match the documented 99.9 sentinel")
+    if spec.record_date_mapping != "jan1_then_sequential_days":
+        problems.append("record_date_mapping must match the documented annual daily sequence")
+    seen: set[str] = set()
+    if not isinstance(spec.field_evidence, tuple):
+        problems.append("field_evidence must be a tuple")
+    for evidence in spec.field_evidence if isinstance(spec.field_evidence, tuple) else ():
+        if (not isinstance(evidence, TemperatureFormatEvidence)
+                or evidence.field not in FORMAT_CRITICAL_FIELDS or evidence.field in seen
+                or evidence.authority != "IMD" or not evidence.source.strip()
+                or not evidence.statement.strip()):
+            problems.append("field_evidence entries must uniquely identify a critical field and cite evidence")
+            break
+        seen.add(evidence.field)
+    configured_by_field = {
+        "numeric_representation": spec.numeric_representation is not None,
+        "byte_order": spec.byte_order is not None,
+        "raw_ij_mapping": spec.raw_ij_mapping is not None,
+        "record_framing": spec.record_framing is not None,
+    }
+    if any(not configured_by_field[field] for field in seen):
+        problems.append("field_evidence cannot be supplied for an unset format field")
+    if problems:
+        raise ValueError("; ".join(problems))
+
+
+def temperature_format_blockers(spec: TemperatureGrdFormatSpec = IMD_TEMPERATURE_FORMAT) -> list[str]:
+    """Return unset or unsupported-by-evidence critical fields, without IO."""
+    validate_temperature_format_spec(spec)
+    blockers: list[str] = []
+    if spec.numeric_representation is None or not spec.numeric_representation.strip():
+        blockers.append("numeric_representation")
+    if spec.byte_order is None:
+        blockers.append("byte_order")
+    if spec.raw_ij_mapping is None:
+        blockers.append("raw_ij_mapping")
+    if spec.record_framing is None or not spec.record_framing.strip():
+        blockers.append("record_framing")
+    evidenced = {item.field for item in spec.field_evidence}
+    for field in FORMAT_CRITICAL_FIELDS:
+        configured = {
+            "numeric_representation": bool(spec.numeric_representation and spec.numeric_representation.strip()),
+            "byte_order": spec.byte_order is not None,
+            "raw_ij_mapping": spec.raw_ij_mapping is not None,
+            "record_framing": bool(spec.record_framing and spec.record_framing.strip()),
+        }[field]
+        if configured and field not in evidenced:
+            blockers.append(f"{field}.authoritative_evidence")
+    return blockers
+
+
+def temperature_date_for_record(year: int, record_number: int) -> date:
+    """Map one-based daily record number to the documented annual date sequence."""
+    record_count = expected_daily_records(year)
+    if not 1 <= record_number <= record_count:
+        raise ValueError(f"record_number must be between 1 and {record_count} for {year}")
+    return date(year, 1, 1) + timedelta(days=record_number - 1)
 
 
 def missing_years(years: list[int] | tuple[int, ...]) -> list[int]:
@@ -96,9 +252,24 @@ def make_normalized_temperature_record(*, observation_date: date, latitude: floa
     )
 
 
-def read_temperature_grd(path: str | Path, latitude: float, longitude: float) -> list[NormalizedHistoricalRecord]:
-    """Validate structure and fail before decoding until official format evidence is complete."""
+def read_temperature_grd(path: str | Path, latitude: float, longitude: float,
+                         format_spec: TemperatureGrdFormatSpec = IMD_TEMPERATURE_FORMAT) -> list[NormalizedHistoricalRecord]:
+    """Validate configuration/structure and fail before any payload read.
+
+    This preparation phase intentionally has no binary unpacker. A complete
+    configuration is necessary but not sufficient: field-specific IMD evidence
+    is required, and successful authorization still stops until a decoder is
+    implemented and separately validated.
+    """
     path = Path(path)
+    try:
+        validate_temperature_format_spec(format_spec)
+    except (TypeError, ValueError, AttributeError) as exc:
+        raise TemperatureDecodeBlocked(
+            f"Temperature decoding blocked for {path.name}; format configuration is invalid: {exc}",
+            reason_code="BLOCKED_FORMAT_CONFIGURATION_INVALID",
+            details={"configuration_error": str(exc)},
+        ) from exc
     structural = inspect_imd_temperature_grd(path)
     if not structural["size_matches_documented_layout"]:
         raise ValueError(
@@ -106,11 +277,19 @@ def read_temperature_grd(path: str | Path, latitude: float, longitude: float) ->
             f"{structural['expected_size_bytes']} bytes, found {structural['actual_size_bytes']}"
         )
     select_temperature_grid_point(latitude, longitude)  # validate generic coordinates/coverage
+    blockers = temperature_format_blockers(format_spec)
+    if blockers:
+        raise TemperatureDecodeBlocked(
+            f"Temperature decoding blocked for {path.name}; no GRD values were read. "
+            f"Unverified required format fields: {', '.join(blockers)}.",
+            reason_code="BLOCKED_FORMAT_FIELDS_UNVERIFIED",
+            details={"unverified_fields": blockers},
+        )
     raise TemperatureDecodeBlocked(
-        f"Temperature decoding blocked for {path.name}; no GRD values were read. "
-        f"Unverified required format fields: {', '.join(UNRESOLVED_FORMAT_FIELDS)}. "
-        "Annual date mapping is documented as a sequential daily archive convention, "
-        "but the payload cannot be tied to dates/cells without the missing format details."
+        f"Temperature decoding blocked for {path.name}; configuration is complete, "
+        "but the payload decoder is intentionally not implemented in this preparation phase.",
+        reason_code="BLOCKED_DECODER_NOT_IMPLEMENTED",
+        details={"payload_read": False},
     )
 
 
@@ -185,12 +364,14 @@ def audit_temperature_directory(raw_dir: str | Path) -> dict[str, Any]:
             "logical_longitude_centers": [LONGITUDE_FIRST, LONGITUDE_FIRST + (GRID_COLUMNS - 1) * LONGITUDE_STEP],
             "logical_axis_directions": {"latitude": "ascending", "longitude": "ascending"},
             "daily_records": "Sequential direct-access records; archive sample convention starts 1 January and includes leap days.",
-            "bytes_per_value": 4, "float32_width_supported": True,
+            "bytes_per_value": 4,
             "units": "degrees Celsius", "missing_value_marker": UNDEFINED_VALUE,
             "scale_offset": "No scale/offset documented; sample readers use direct values.",
             "byte_order": "UNVERIFIED",
+            "numeric_representation": "UNVERIFIED",
             "explicit_float_representation": "UNVERIFIED",
             "raw_ij_to_geographic_mapping": "UNVERIFIED",
+            "record_framing": "UNVERIFIED",
             "header_or_prefix_structure": "UNVERIFIED",
             "unverified_required_for_decode": list(UNRESOLVED_FORMAT_FIELDS),
             "header_bytes": "UNKNOWN",

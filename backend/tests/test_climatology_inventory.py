@@ -32,7 +32,7 @@ def test_netcdf_metadata_parser_reads_grid_metadata_without_assuming_period(tmp_
     assert item["resolution_degrees"] == pytest.approx(.25)
     assert item["latitude"]["count"] == 2
     assert item["missing_value"] == -999
-    assert "exact start/end years not encoded" in item["climatology_period"]
+    assert item["climatology_period"].startswith("1991-2020")
 
 
 def test_inventory_reports_month_coverage_and_duplicate_names(tmp_path):
@@ -44,3 +44,11 @@ def test_inventory_reports_month_coverage_and_duplicate_names(tmp_path):
     group = inventory["month_completeness"]["rainfall (0.25 degree)"]
     assert group["available_months"] == ["jan"]
     assert len(group["missing_months"]) == 11
+
+
+def test_repository_climatology_month_coverage_is_current():
+    root = Path(__file__).resolve().parents[2] / "data" / "raw" / "imd_climatology"
+    inventory = build_climatology_inventory(root)
+    assert inventory["file_count"] == 60
+    assert all(not group["missing_months"] for group in inventory["month_completeness"].values())
+    assert "1991-2020" in inventory["period_note"]

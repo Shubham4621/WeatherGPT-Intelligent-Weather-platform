@@ -1,6 +1,7 @@
 """IMD district-warning integration. No non-IMD warning inference is done here."""
 
 import asyncio
+import json
 import time
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -46,15 +47,28 @@ class ImdAlertService:
     @staticmethod
     def resolve_district(city: str) -> tuple[str, str, str]:
         normalized = city.strip().casefold().split(",", 1)[0].strip()
-        districts: dict[str, tuple[str, str, str]] = {
-            "dhule": ("Dhule", "Maharashtra", settings.IMD_DHULE_OBJ_ID.strip()),
-        }
-        result = districts.get(normalized)
-        if not result:
-            raise UnsupportedAlertLocation(city)
-        if not result[2]:
-            raise AlertProviderUnavailable("IMD Dhule district object ID is not configured from a verified IMD source.")
-        return result
+        try:
+            configured = json.loads(settings.IMD_DISTRICT_MAPPINGS or "{}")
+            if not isinstance(configured, dict):
+                raise ValueError
+        except (TypeError, ValueError):
+            raise AlertProviderUnavailable("provider_configuration_invalid")
+        # Values: {"aliases": ["city"], "district": "...", "state": "...", "obj_id": "..."}
+        for value in configured.values():
+            if not isinstance(value, dict):
+                continue
+            names = [value.get("district", ""), *value.get("aliases", [])]
+            if any(isinstance(name, str) and name.strip().casefold() == normalized for name in names):
+                obj_id = str(value.get("obj_id", "")).strip()
+                if not obj_id:
+                    raise AlertProviderUnavailable("location_mapping_unresolved")
+                return str(value.get("district", "")).strip(), str(value.get("state", "")).strip(), obj_id
+        # Compatibility for the previously configured verified Dhule ID.
+        if normalized == "dhule" and settings.IMD_DHULE_OBJ_ID.strip():
+            return "Dhule", "Maharashtra", settings.IMD_DHULE_OBJ_ID.strip()
+        if normalized == "dhule":
+            raise AlertProviderUnavailable("location_mapping_unresolved")
+        raise UnsupportedAlertLocation(city)
 
     async def get_alerts(self, city: str) -> WeatherAlertsResponse:
         district, state, obj_id = self.resolve_district(city)
@@ -68,14 +82,15 @@ class ImdAlertService:
                 response = await client.get(self.url, params={"id": obj_id}, headers={"Accept": "application/json"})
         except httpx.TimeoutException as exc:
             logger.warning("IMD warning request timed out", extra={"provider": "IMD"})
-            raise AlertProviderUnavailable from exc
+            raise AlertProviderUnavailable("provider_timeout") from exc
         except httpx.RequestError as exc:
             logger.warning("IMD warning connection failed", extra={"provider": "IMD", "error_type": type(exc).__name__})
-            raise AlertProviderUnavailable from exc
+            raise AlertProviderUnavailable("provider_connection_error") from exc
         if response.status_code != 200:
             # Do not log body: gateways can include operational or access metadata.
             logger.warning("IMD warning provider returned HTTP error", extra={"provider": "IMD", "status_code": response.status_code})
-            raise AlertProviderUnavailable
+            reason = "provider_authorization_required" if response.status_code in (401, 403) else "provider_http_error"
+            raise AlertProviderUnavailable(reason)
         try:
             payload = response.json()
             normalized = self._normalize(payload, district, state, obj_id)
@@ -114,15 +129,17 @@ class ImdAlertService:
             issued_at = datetime.fromisoformat(str(issued_date)).replace(tzinfo=timezone.utc)
         days: list[AlertDay] = []
         for index in range(1, 6):
-            if f"Day_{index}" not in row or f"Day{index}_Color" not in row:
+            code_key = next((key for key in (f"Day{index}", f"Day_{index}") if key in row), None)
+            color_key = next((key for key in (f"Day{index}_Color", f"Day_{index}_Color", f"Day{index}Color") if key in row), None)
+            if code_key is None or color_key is None:
                 raise ValueError("Required IMD forecast-day fields missing")
-            raw_codes = row.get(f"Day_{index}")
+            raw_codes = row.get(code_key)
             codes = self._codes(raw_codes)
-            color_raw = row.get(f"Day{index}_Color")
+            color_raw = row.get(color_key)
             color_code = int(color_raw) if color_raw not in (None, "") else None
             warnings = [AlertWarning(warning_code=code, warning_type=WARNING_TYPES.get(code, f"Unknown IMD warning code {code}")) for code in codes if code != 1]
             days.append(AlertDay(date=(issued_at + timedelta(days=index - 1)).replace(hour=0, minute=0, second=0, microsecond=0), warnings=warnings, warning_codes=codes, severity=COLOR_NAMES.get(color_code) if color_code is not None else None, severity_code=color_code, is_active=bool(warnings)))
-        return WeatherAlertsResponse(location=district, district=district_value, state=state, issued_at=issued_at, forecast_days=days, source=IMD_SOURCE, source_url=f"{self.url}?id={obj_id}")
+        return WeatherAlertsResponse(location=district, district=district_value, state=state, issued_at=issued_at, forecast_days=days, source=IMD_SOURCE, source_url=f"{self.url}?id={obj_id}", retrieved_at=datetime.now(timezone.utc), reference=obj_id)
 
     @staticmethod
     def _codes(value: Any) -> list[int]:

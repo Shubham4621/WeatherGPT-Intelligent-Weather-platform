@@ -25,6 +25,15 @@ def test_multiple_warning_codes_and_source_normalize(service):
     assert result.forecast_days[0].severity == "Orange"
     assert result.source.startswith("India Meteorological Department")
     assert result.issued_at == datetime(2026, 9, 24, 10, 30, tzinfo=timezone.utc)
+    assert result.official and result.provider_status == "available"
+    assert result.retrieved_at is not None and result.reference == "9001"
+
+
+def test_documented_day_field_spellings_are_supported(service):
+    row = payload()[0]
+    row.update({f"Day{d}": row.pop(f"Day_{d}") for d in range(1, 6)})
+    result = service._normalize([row], "Dhule", "Maharashtra", "9001")
+    assert result.forecast_days[0].warning_codes == [2, 4]
 
 
 @pytest.mark.parametrize("color,name", [(1, "Red"), (2, "Orange"), (3, "Yellow"), (4, "Green"), (8, None)])
@@ -73,7 +82,7 @@ async def test_timeout_is_controlled(service, monkeypatch):
 
 
 @pytest.mark.anyio
-@pytest.mark.parametrize("status,body", [(403, "blocked"), (200, "not-json"), (200, "[]")])
+@pytest.mark.parametrize("status,body", [(401, "blocked"), (403, "blocked"), (200, "not-json"), (200, "[]")])
 async def test_provider_errors_are_controlled(service, monkeypatch, status, body):
     class Response:
         status_code = status
@@ -85,5 +94,30 @@ async def test_provider_errors_are_controlled(service, monkeypatch, status, body
         async def __aexit__(self, *args): return None
         async def get(self, *args, **kwargs): return Response()
     monkeypatch.setattr("app.services.imd_alert_service.httpx.AsyncClient", lambda **kwargs: Client())
-    with pytest.raises(AlertProviderUnavailable):
+    with pytest.raises(AlertProviderUnavailable) as error:
         await service.get_alerts("Dhule")
+    if status in (401, 403):
+        assert str(error.value) == "provider_authorization_required"
+
+
+@pytest.mark.anyio
+async def test_success_cache_and_expiration(service, monkeypatch):
+    calls = 0
+    class Response:
+        status_code = 200
+        def json(self): return payload()
+    class Client:
+        async def __aenter__(self): return self
+        async def __aexit__(self, *args): return None
+        async def get(self, *args, **kwargs):
+            nonlocal calls
+            calls += 1
+            return Response()
+    monkeypatch.setattr("app.services.imd_alert_service.httpx.AsyncClient", lambda **kwargs: Client())
+    service.ttl = 60
+    await service.get_alerts("Dhule")
+    await service.get_alerts("Dhule")
+    assert calls == 1
+    service._cache["9001"] = (0, service._cache["9001"][1])
+    await service.get_alerts("Dhule")
+    assert calls == 2

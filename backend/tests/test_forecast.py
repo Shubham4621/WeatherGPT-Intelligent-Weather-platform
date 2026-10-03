@@ -22,7 +22,10 @@ def sample_forecast():
 
 @pytest.mark.anyio
 async def test_forecast_endpoint_returns_typed_normalized_data(client):
-    with patch("app.api.routes.weather.weather_service.get_forecast_by_city", new_callable=AsyncMock, return_value=sample_forecast()):
+    with (
+        patch("app.api.routes.weather.location_service.resolve", new_callable=AsyncMock, return_value=Mock(latitude=20.9, longitude=74.78)),
+        patch("app.api.routes.weather.weather_service.get_forecast_by_coords", new_callable=AsyncMock, return_value=sample_forecast()),
+    ):
         response = await client.get("/api/v1/weather/forecast?city=Dhule")
     assert response.status_code == 200
     body = response.json()

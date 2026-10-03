@@ -1,27 +1,26 @@
 {
   "catalog_title": "Locally supplied IMD gridded climatology metadata inventory",
   "inspection_is_metadata_only": true,
-  "period_note": "The files declare a 30-year climatology; exact baseline years are not encoded in inspected metadata.",
-  "file_count": 54,
+  "period_note": "IMD confirmed the climatology baseline is 1991-2020; NetCDF attributes identify a 30-year calculation.",
+  "file_count": 60,
   "month_completeness": {
     "maximum_temperature (0.5 degree)": {
       "available_months": [
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "oct"
-      ],
-      "missing_months": [
         "jan",
         "feb",
         "mar",
         "apr",
         "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
         "nov",
         "dec"
       ],
-      "unique_month_count": 5
+      "missing_months": [],
+      "unique_month_count": 12
     },
     "mean_temperature (0.5 degree)": {
       "available_months": [
@@ -108,7 +107,7 @@
       "month_number": 4,
       "file_month_attribute_zero_based": 3,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -186,7 +185,7 @@
       "month_number": 8,
       "file_month_attribute_zero_based": 7,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -264,7 +263,7 @@
       "month_number": 12,
       "file_month_attribute_zero_based": 11,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -342,7 +341,7 @@
       "month_number": 2,
       "file_month_attribute_zero_based": 1,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -420,7 +419,7 @@
       "month_number": 1,
       "file_month_attribute_zero_based": 0,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -498,7 +497,7 @@
       "month_number": 7,
       "file_month_attribute_zero_based": 6,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -576,7 +575,7 @@
       "month_number": 6,
       "file_month_attribute_zero_based": 5,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -654,7 +653,7 @@
       "month_number": 3,
       "file_month_attribute_zero_based": 2,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -732,7 +731,7 @@
       "month_number": 5,
       "file_month_attribute_zero_based": 4,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -810,7 +809,7 @@
       "month_number": 11,
       "file_month_attribute_zero_based": 10,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -888,7 +887,7 @@
       "month_number": 10,
       "file_month_attribute_zero_based": 9,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -966,7 +965,7 @@
       "month_number": 9,
       "file_month_attribute_zero_based": 8,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 1.0,
       "units": "mm",
       "variable_names": [
@@ -1044,7 +1043,7 @@
       "month_number": 4,
       "file_month_attribute_zero_based": 3,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1122,7 +1121,7 @@
       "month_number": 8,
       "file_month_attribute_zero_based": 7,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1200,7 +1199,7 @@
       "month_number": 12,
       "file_month_attribute_zero_based": 11,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1278,7 +1277,7 @@
       "month_number": 2,
       "file_month_attribute_zero_based": 1,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1356,7 +1355,7 @@
       "month_number": 1,
       "file_month_attribute_zero_based": 0,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1434,7 +1433,7 @@
       "month_number": 7,
       "file_month_attribute_zero_based": 6,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1512,7 +1511,7 @@
       "month_number": 6,
       "file_month_attribute_zero_based": 5,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1590,7 +1589,7 @@
       "month_number": 3,
       "file_month_attribute_zero_based": 2,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1668,7 +1667,7 @@
       "month_number": 5,
       "file_month_attribute_zero_based": 4,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1746,7 +1745,7 @@
       "month_number": 11,
       "file_month_attribute_zero_based": 10,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1824,7 +1823,7 @@
       "month_number": 10,
       "file_month_attribute_zero_based": 9,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1902,7 +1901,7 @@
       "month_number": 9,
       "file_month_attribute_zero_based": 8,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.25,
       "units": "mm",
       "variable_names": [
@@ -1970,6 +1969,78 @@
       "format": "NetCDF classic (CDF-1)"
     },
     {
+      "filename": "tmax_p5_apr_clm.nc",
+      "path": "temperature/tmax_p5_apr_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "9261f5cbcace1ec40b3d1038d8c50cd1306dca6faf097825ab1dc434ae06c3f3",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "apr",
+      "month_number": 4,
+      "file_month_attribute_zero_based": 3,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 3,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
       "filename": "tmax_p5_aug_clm.nc",
       "path": "temperature/tmax_p5_aug_clm.nc",
       "size_bytes": 16515,
@@ -1980,7 +2051,7 @@
       "month_number": 8,
       "file_month_attribute_zero_based": 7,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2042,6 +2113,222 @@
       "format": "NetCDF classic (CDF-1)"
     },
     {
+      "filename": "tmax_p5_dec_clm.nc",
+      "path": "temperature/tmax_p5_dec_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "ed4b7a39cd224949bd23d894c13cafa3a57bac4b3a90f0e8ef92d5181aa01c8a",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "dec",
+      "month_number": 12,
+      "file_month_attribute_zero_based": 11,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 11,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_feb_clm.nc",
+      "path": "temperature/tmax_p5_feb_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "f99c0aaa8e868a01ada0bde8efbe1099e6504724d5ee1635181a27c410ff146c",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "feb",
+      "month_number": 2,
+      "file_month_attribute_zero_based": 1,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 1,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_jan_clm.nc",
+      "path": "temperature/tmax_p5_jan_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "bd95960ea91017ec71ef34763e55d89d25fdc0c475084527e29019c50cdf3d8c",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "jan",
+      "month_number": 1,
+      "file_month_attribute_zero_based": 0,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 0,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
       "filename": "tmax_p5_jul_clm.nc",
       "path": "temperature/tmax_p5_jul_clm.nc",
       "size_bytes": 16515,
@@ -2052,7 +2339,7 @@
       "month_number": 7,
       "file_month_attribute_zero_based": 6,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2114,8 +2401,8 @@
       "format": "NetCDF classic (CDF-1)"
     },
     {
-      "filename": "tmax_p5_jun_clm (1).nc",
-      "path": "temperature/tmax_p5_jun_clm (1).nc",
+      "filename": "tmax_p5_jun_clm.nc",
+      "path": "temperature/tmax_p5_jun_clm.nc",
       "size_bytes": 16515,
       "sha256": "369b51e1def769fee9b97f67923759d861ad62f9ce5eab403f6cebf6d0e1eb6b",
       "parameter": "maximum_temperature",
@@ -2124,7 +2411,7 @@
       "month_number": 6,
       "file_month_attribute_zero_based": 5,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2186,17 +2473,17 @@
       "format": "NetCDF classic (CDF-1)"
     },
     {
-      "filename": "tmax_p5_jun_clm.nc",
-      "path": "temperature/tmax_p5_jun_clm.nc",
+      "filename": "tmax_p5_mar_clm.nc",
+      "path": "temperature/tmax_p5_mar_clm.nc",
       "size_bytes": 16515,
-      "sha256": "369b51e1def769fee9b97f67923759d861ad62f9ce5eab403f6cebf6d0e1eb6b",
+      "sha256": "cc163ed322872f42b3902241e4bc8fd8c74a13f9ff58126ba038e48cd6d381df",
       "parameter": "maximum_temperature",
       "product_code": "tmax_p5",
-      "month": "jun",
-      "month_number": 6,
-      "file_month_attribute_zero_based": 5,
+      "month": "mar",
+      "month_number": 3,
+      "file_month_attribute_zero_based": 2,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2235,7 +2522,151 @@
       "missing_value": 99.9000015258789,
       "fill_value": 99.9000015258789,
       "variable_attributes": {
-        "month": 5,
+        "month": 2,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_may_clm.nc",
+      "path": "temperature/tmax_p5_may_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "c667ab20c610a6e59b186cd0f78a921ef8a0be343054c51ee0aa24e63eb2e3f6",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "may",
+      "month_number": 5,
+      "file_month_attribute_zero_based": 4,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 4,
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years",
+        "missing_value": 99.9000015258789,
+        "long_name": "DAILYTEMP",
+        "_FillValue": 99.9000015258789
+      },
+      "global_attributes": {},
+      "source_provenance_attributes": {
+        "info": "function clmMonTLL: contributed.ncl",
+        "time_op_ncl": "Climatology: 30 years"
+      },
+      "source_provenance": "No source/provenance string encoded in file",
+      "dhule_reference_selection": {
+        "requested_latitude": 20.9,
+        "requested_longitude": 74.8,
+        "grid_latitude": 21.0,
+        "grid_longitude": 75.0,
+        "distance_km": 23.558
+      },
+      "format": "NetCDF classic (CDF-1)"
+    },
+    {
+      "filename": "tmax_p5_nov_clm.nc",
+      "path": "temperature/tmax_p5_nov_clm.nc",
+      "size_bytes": 16515,
+      "sha256": "af9637ee43db97e5fa7807ce50fd0b78cc395498de75fa737f9efcd16d3ddd8b",
+      "parameter": "maximum_temperature",
+      "product_code": "tmax_p5",
+      "month": "nov",
+      "month_number": 11,
+      "file_month_attribute_zero_based": 10,
+      "month_attribute_matches_filename": true,
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
+      "resolution_degrees": 0.5,
+      "units": null,
+      "variable_names": [
+        "tmax",
+        "lat",
+        "lon"
+      ],
+      "data_variable": "tmax",
+      "data_dimensions": [
+        "lat",
+        "lon"
+      ],
+      "data_shape": [
+        61,
+        61
+      ],
+      "netcdf_dimensions": {
+        "time": null,
+        "lat": 61,
+        "lon": 61
+      },
+      "latitude": {
+        "minimum": 7.5,
+        "maximum": 37.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "longitude": {
+        "minimum": 67.5,
+        "maximum": 97.5,
+        "count": 61,
+        "step_degrees": 0.5,
+        "ordering": "ascending"
+      },
+      "missing_value": 99.9000015258789,
+      "fill_value": 99.9000015258789,
+      "variable_attributes": {
+        "month": 10,
         "info": "function clmMonTLL: contributed.ncl",
         "time_op_ncl": "Climatology: 30 years",
         "missing_value": 99.9000015258789,
@@ -2268,7 +2699,7 @@
       "month_number": 10,
       "file_month_attribute_zero_based": 9,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2340,7 +2771,7 @@
       "month_number": 9,
       "file_month_attribute_zero_based": 8,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2412,7 +2843,7 @@
       "month_number": 4,
       "file_month_attribute_zero_based": 3,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2484,7 +2915,7 @@
       "month_number": 8,
       "file_month_attribute_zero_based": 7,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2556,7 +2987,7 @@
       "month_number": 12,
       "file_month_attribute_zero_based": 11,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2628,7 +3059,7 @@
       "month_number": 2,
       "file_month_attribute_zero_based": 1,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2700,7 +3131,7 @@
       "month_number": 1,
       "file_month_attribute_zero_based": 0,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2772,7 +3203,7 @@
       "month_number": 7,
       "file_month_attribute_zero_based": 6,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2844,7 +3275,7 @@
       "month_number": 6,
       "file_month_attribute_zero_based": 5,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2916,7 +3347,7 @@
       "month_number": 3,
       "file_month_attribute_zero_based": 2,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -2988,7 +3419,7 @@
       "month_number": 5,
       "file_month_attribute_zero_based": 4,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3060,7 +3491,7 @@
       "month_number": 11,
       "file_month_attribute_zero_based": 10,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3132,7 +3563,7 @@
       "month_number": 10,
       "file_month_attribute_zero_based": 9,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3204,7 +3635,7 @@
       "month_number": 9,
       "file_month_attribute_zero_based": 8,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3276,7 +3707,7 @@
       "month_number": 4,
       "file_month_attribute_zero_based": 3,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3348,7 +3779,7 @@
       "month_number": 8,
       "file_month_attribute_zero_based": 7,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3420,7 +3851,7 @@
       "month_number": 12,
       "file_month_attribute_zero_based": 11,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3492,7 +3923,7 @@
       "month_number": 2,
       "file_month_attribute_zero_based": 1,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3564,7 +3995,7 @@
       "month_number": 1,
       "file_month_attribute_zero_based": 0,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3636,7 +4067,7 @@
       "month_number": 7,
       "file_month_attribute_zero_based": 6,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3708,7 +4139,7 @@
       "month_number": 6,
       "file_month_attribute_zero_based": 5,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3780,7 +4211,7 @@
       "month_number": 3,
       "file_month_attribute_zero_based": 2,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3852,7 +4283,7 @@
       "month_number": 5,
       "file_month_attribute_zero_based": 4,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3924,7 +4355,7 @@
       "month_number": 11,
       "file_month_attribute_zero_based": 10,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -3996,7 +4427,7 @@
       "month_number": 10,
       "file_month_attribute_zero_based": 9,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -4068,7 +4499,7 @@
       "month_number": 9,
       "file_month_attribute_zero_based": 8,
       "month_attribute_matches_filename": true,
-      "climatology_period": "30 years (exact start/end years not encoded)",
+      "climatology_period": "1991-2020 (confirmed by IMD; file records 30-year calculation)",
       "resolution_degrees": 0.5,
       "units": null,
       "variable_names": [
@@ -4129,56 +4560,5 @@
       },
       "format": "NetCDF classic (CDF-1)"
     }
-  ],
-  "authoritative_source_review": {
-    "review_date": "2026-09-27",
-    "baseline": {
-      "local_metadata_declaration": "Climatology: 30 years",
-      "verified_start_year": null,
-      "verified_end_year": null,
-      "status": "UNSPECIFIED_FOR_THESE_FILES",
-      "finding": "No reviewed authoritative source identifies the baseline years for these exact monthly gridded NetCDF products. Do not label them 1991-2020.",
-      "sources_reviewed": [
-        "https://dsp.imdpune.gov.in/home_gridded_climatology.php",
-        "https://imdpune.gov.in/climinfo/Max.html",
-        "https://imdpune.gov.in/climinfo/Min.html",
-        "https://www.imdpune.gov.in/library/public/Climatological%20Tables%201991-2020.pdf"
-      ]
-    },
-    "temperature_units": {
-      "tmax": {
-        "unit": null,
-        "verified_for_this_product": false
-      },
-      "tmin": {
-        "unit": null,
-        "verified_for_this_product": false
-      },
-      "tmean": {
-        "unit": null,
-        "verified_for_this_product": false
-      },
-      "finding": "The local monthly 0.5-degree climatology files contain no units attribute. IMD documentation explicitly gives Celsius for a separate daily 1-degree gridded temperature product; that unit was not transferred to these products.",
-      "related_product_reference": "https://imdpune.gov.in/cmpg/Griddata/Max_1_Bin.html"
-    },
-    "tmax_month_availability": {
-      "local_files_found": [
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "oct"
-      ],
-      "unique_local_month_count": 5,
-      "june_duplicate_is_byte_identical": true,
-      "official_exact_monthly_download_list_verified": false,
-      "finding": "The official IMD Climate Information page identifies a Monthly Maximum Temperature Climatology view, but its accessible text does not expose a product file list, period, or unit. The IMD-DSP Gridded Climatology page is visible with two selector controls, but its available choices are not exposed in the accessible page text. The public Gridded Data Archive lists 1-degree historical daily Tmax/Tmin and 0.5-degree real-time daily Tmax/Tmin; these are not the monthly 0.5-degree climatology products. No authoritative source reviewed explains the five-month local subset or proves that IMD only publishes those five months.",
-      "sources_reviewed": [
-        "https://imdpune.gov.in/climinfo/Max.html",
-        "https://dsp.imdpune.gov.in/home_gridded_climatology.php",
-        "https://www.imdpune.gov.in/lrfindex.php",
-        "https://imdpune.gov.in/cmpg/Griddata/Max_1_Bin.html"
-      ]
-    }
-  }
+  ]
 }

@@ -4,15 +4,21 @@ import userEvent from '@testing-library/user-event';
 import '../test/setup';
 import App from '../App';
 
+vi.mock('../components/map/WeatherMapCanvas', () => ({
+  default: () => <div role="region" aria-label="Interactive geographic weather map"/>,
+}));
+
 afterEach(() => { cleanup(); vi.restoreAllMocks(); document.documentElement.classList.remove('dark'); window.localStorage.clear(); });
 
 describe('WeatherGPT extended workspace sections', () => {
-  it('shows an honest unavailable state for map layers', async () => {
+  it('renders the interactive map workspace and real data layer controls', async () => {
     const user = userEvent.setup(); render(<App/>);
     await user.click(screen.getByRole('button', { name: 'Weather Map' }));
-    expect(screen.getByRole('heading', { name: 'Interactive Weather Map' })).toBeInTheDocument();
-    expect(screen.getByText('Map data unavailable')).toBeInTheDocument();
-    expect(screen.queryByText(/radar loop/i)).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Weather Map' })).toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'Interactive geographic weather map' })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /Current Weather/ })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /NWP \/ GFS/ })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /Official IMD warnings/ })).toBeInTheDocument();
   });
 
   it('calls the existing one-day model API with generic coordinates and renders its labelled result', async () => {

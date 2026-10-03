@@ -88,6 +88,10 @@ class WeatherAlertsResponse(BaseModel):
     forecast_days: list[AlertDay]
     source: str = "India Meteorological Department (IMD)"
     source_url: str
+    provider_status: str = "available"
+    official: bool = True
+    retrieved_at: datetime | None = None
+    reference: str | None = None
 
 
 class AdvisoryRisk(StrEnum):

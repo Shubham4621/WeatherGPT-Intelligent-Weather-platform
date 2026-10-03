@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "coordinate_reference": "District headquarters or the named administrative reference point; these are not district centroids.",
+  "coordinate_sources": {
+    "owm": {
+      "name": "OpenWeatherMap Geocoding API",
+      "query_pattern": "<district headquarters>, Maharashtra, IN",
+      "accessed_at": "2026-10-02",
+      "verification": "The returned country was IN and state was Maharashtra for each entry."
+    },
+    "mumbai_suburban": {
+      "name": "Mumbai Suburban District, Government of Maharashtra, Geo-Tagging of Offices",
+      "url": "https://mumbaisuburban.gov.in/en/geo-tagging-of-offices/",
+      "accessed_at": "2026-10-02",
+      "verification": "Collector Office / Administrative Building, Bandra East: 19.06134 N, 72.85006 E."
+    }
+  },
+  "districts": [
+    {"name":"Ahilyanagar","normalized_name":"ahilyanagar","headquarters":"Ahilyanagar","state":"Maharashtra","country":"IN","latitude":19.092952,"longitude":74.7493451,"coordinate_source":"owm","aliases":{"en":["Ahmednagar","Ahmadnagar"],"mr":["अहिल्यानगर","अहमदनगर"],"hi":["अहिल्यानगर","अहमदनगर"]}},
+    {"name":"Akola","normalized_name":"akola","headquarters":"Akola","state":"Maharashtra","country":"IN","latitude":20.7116604,"longitude":77.002632,"coordinate_source":"owm","aliases":{"en":[],"mr":["अकोला"],"hi":["अकोला"]}},
+    {"name":"Amravati","normalized_name":"amravati","headquarters":"Amravati","state":"Maharashtra","country":"IN","latitude":20.9316219,"longitude":77.7588455,"coordinate_source":"owm","aliases":{"en":[],"mr":["अमरावती"],"hi":["अमरावती"]}},
+    {"name":"Chhatrapati Sambhajinagar","normalized_name":"chhatrapati sambhajinagar","headquarters":"Chhatrapati Sambhajinagar","state":"Maharashtra","country":"IN","latitude":19.877263,"longitude":75.3390241,"coordinate_source":"owm","aliases":{"en":["Aurangabad"],"mr":["छत्रपती संभाजीनगर","औरंगाबाद"],"hi":["छत्रपति संभाजीनगर","औरंगाबाद"]}},
+    {"name":"Beed","normalized_name":"beed","headquarters":"Beed","state":"Maharashtra","country":"IN","latitude":18.9904059,"longitude":75.7542291,"coordinate_source":"owm","aliases":{"en":["Bid"],"mr":["बीड"],"hi":["बीड"]}},
+    {"name":"Bhandara","normalized_name":"bhandara","headquarters":"Bhandara","state":"Maharashtra","country":"IN","latitude":21.1706698,"longitude":79.65658,"coordinate_source":"owm","aliases":{"en":[],"mr":["भंडारा"],"hi":["भंडारा"]}},
+    {"name":"Buldhana","normalized_name":"buldhana","headquarters":"Buldhana","state":"Maharashtra","country":"IN","latitude":20.53208,"longitude":76.179911,"coordinate_source":"owm","aliases":{"en":["Buldana"],"mr":["बुलढाणा"],"hi":["बुलढाणा","बुलढाना"]}},
+    {"name":"Chandrapur","normalized_name":"chandrapur","headquarters":"Chandrapur","state":"Maharashtra","country":"IN","latitude":19.9508161,"longitude":79.2986673,"coordinate_source":"owm","aliases":{"en":["Chanda"],"mr":["चंद्रपूर"],"hi":["चंद्रपुर"]}},
+    {"name":"Dhule","normalized_name":"dhule","headquarters":"Dhule","state":"Maharashtra","country":"IN","latitude":20.898,"longitude":74.7732,"coordinate_source":"owm","aliases":{"en":[],"mr":["धुळे"],"hi":["धुले"]}},
+    {"name":"Gadchiroli","normalized_name":"gadchiroli","headquarters":"Gadchiroli","state":"Maharashtra","country":"IN","latitude":20.1853965,"longitude":80.003509,"coordinate_source":"owm","aliases":{"en":[],"mr":["गडचिरोली"],"hi":["गडचिरोली"]}},
+    {"name":"Gondia","normalized_name":"gondia","headquarters":"Gondia","state":"Maharashtra","country":"IN","latitude":21.455228,"longitude":80.1962729,"coordinate_source":"owm","aliases":{"en":["Gondiya"],"mr":["गोंदिया"],"hi":["गोंदिया"]}},
+    {"name":"Hingoli","normalized_name":"hingoli","headquarters":"Hingoli","state":"Maharashtra","country":"IN","latitude":19.7158472,"longitude":77.1388362,"coordinate_source":"owm","aliases":{"en":[],"mr":["हिंगोली"],"hi":["हिंगोली"]}},
+    {"name":"Jalgaon","normalized_name":"jalgaon","headquarters":"Jalgaon","state":"Maharashtra","country":"IN","latitude":21.0100695,"longitude":75.5696003,"coordinate_source":"owm","aliases":{"en":[],"mr":["जळगाव"],"hi":["जलगांव"]}},
+    {"name":"Jalna","normalized_name":"jalna","headquarters":"Jalna","state":"Maharashtra","country":"IN","latitude":19.8393394,"longitude":75.8818806,"coordinate_source":"owm","aliases":{"en":[],"mr":["जालना"],"hi":["जालना"]}},
+    {"name":"Kolhapur","normalized_name":"kolhapur","headquarters":"Kolhapur","state":"Maharashtra","country":"IN","latitude":16.7028412,"longitude":74.2405329,"coordinate_source":"owm","aliases":{"en":[],"mr":["कोल्हापूर"],"hi":["कोल्हापुर"]}},
+    {"name":"Latur","normalized_name":"latur","headquarters":"Latur","state":"Maharashtra","country":"IN","latitude":18.3982273,"longitude":76.5625913,"coordinate_source":"owm","aliases":{"en":[],"mr":["लातूर"],"hi":["लातूर"]}},
+    {"name":"Mumbai City","normalized_name":"mumbai city","headquarters":"Colaba, Mumbai","state":"Maharashtra","country":"IN","latitude":18.915091,"longitude":72.8259691,"coordinate_source":"owm","aliases":{"en":["Mumbai City District"],"mr":["मुंबई शहर"],"hi":["मुंबई शहर"]}},
+    {"name":"Mumbai Suburban","normalized_name":"mumbai suburban","headquarters":"Bandra East, Mumbai","state":"Maharashtra","country":"IN","latitude":19.06134,"longitude":72.85006,"coordinate_source":"mumbai_suburban","aliases":{"en":["Mumbai Suburban District"],"mr":["मुंबई उपनगर"],"hi":["मुंबई उपनगर"]}},
+    {"name":"Nagpur","normalized_name":"nagpur","headquarters":"Nagpur","state":"Maharashtra","country":"IN","latitude":21.1498134,"longitude":79.0820556,"coordinate_source":"owm","aliases":{"en":[],"mr":["नागपूर"],"hi":["नागपुर"]}},
+    {"name":"Nanded","normalized_name":"nanded","headquarters":"Nanded","state":"Maharashtra","country":"IN","latitude":20.739199,"longitude":79.78100430660089,"coordinate_source":"owm","aliases":{"en":["Nanded Waghala"],"mr":["नांदेड"],"hi":["नांदेड"]}},
+    {"name":"Nandurbar","normalized_name":"nandurbar","headquarters":"Nandurbar","state":"Maharashtra","country":"IN","latitude":21.363778,"longitude":74.2411418,"coordinate_source":"owm","aliases":{"en":[],"mr":["नंदुरबार"],"hi":["नंदुरबार"]}},
+    {"name":"Nashik","normalized_name":"nashik","headquarters":"Nashik","state":"Maharashtra","country":"IN","latitude":20.0112475,"longitude":73.7902364,"coordinate_source":"owm","aliases":{"en":["Nasik"],"mr":["नाशिक"],"hi":["नासिक","नाशिक"]}},
+    {"name":"Palghar","normalized_name":"palghar","headquarters":"Palghar","state":"Maharashtra","country":"IN","latitude":19.6978751,"longitude":72.7686942,"coordinate_source":"owm","aliases":{"en":[],"mr":["पालघर"],"hi":["पालघर"]}},
+    {"name":"Parbhani","normalized_name":"parbhani","headquarters":"Parbhani","state":"Maharashtra","country":"IN","latitude":19.262469,"longitude":76.7718,"coordinate_source":"owm","aliases":{"en":[],"mr":["परभणी"],"hi":["परभणी"]}},
+    {"name":"Pune","normalized_name":"pune","headquarters":"Pune","state":"Maharashtra","country":"IN","latitude":18.5213738,"longitude":73.8545071,"coordinate_source":"owm","aliases":{"en":["Poona"],"mr":["पुणे"],"hi":["पुणे"]}},
+    {"name":"Raigad","normalized_name":"raigad","headquarters":"Alibag","state":"Maharashtra","country":"IN","latitude":18.6498427,"longitude":72.8765469,"coordinate_source":"owm","aliases":{"en":["Raigarh"],"mr":["रायगड"],"hi":["रायगढ़"]}},
+    {"name":"Ratnagiri","normalized_name":"ratnagiri","headquarters":"Ratnagiri","state":"Maharashtra","country":"IN","latitude":16.9933521,"longitude":73.2954371,"coordinate_source":"owm","aliases":{"en":[],"mr":["रत्नागिरी"],"hi":["रत्नागिरी"]}},
+    {"name":"Sangli","normalized_name":"sangli","headquarters":"Sangli","state":"Maharashtra","country":"IN","latitude":16.8502534,"longitude":74.5948885,"coordinate_source":"owm","aliases":{"en":[],"mr":["सांगली"],"hi":["सांगली"]}},
+    {"name":"Satara","normalized_name":"satara","headquarters":"Satara","state":"Maharashtra","country":"IN","latitude":17.688321,"longitude":74.0041726,"coordinate_source":"owm","aliases":{"en":[],"mr":["सातारा"],"hi":["सतारा"]}},
+    {"name":"Sindhudurg","normalized_name":"sindhudurg","headquarters":"Oros","state":"Maharashtra","country":"IN","latitude":16.1163272,"longitude":73.7078762,"coordinate_source":"owm","aliases":{"en":["Sindhu Durg"],"mr":["सिंधुदुर्ग"],"hi":["सिंधुदुर्ग"]}},
+    {"name":"Solapur","normalized_name":"solapur","headquarters":"Solapur","state":"Maharashtra","country":"IN","latitude":17.6699734,"longitude":75.9008118,"coordinate_source":"owm","aliases":{"en":["Sholapur"],"mr":["सोलापूर"],"hi":["सोलापुर"]}},
+    {"name":"Thane","normalized_name":"thane","headquarters":"Thane","state":"Maharashtra","country":"IN","latitude":19.1943294,"longitude":72.9701779,"coordinate_source":"owm","aliases":{"en":[],"mr":["ठाणे"],"hi":["ठाणे"]}},
+    {"name":"Wardha","normalized_name":"wardha","headquarters":"Wardha","state":"Maharashtra","country":"IN","latitude":20.7464941,"longitude":78.5997922,"coordinate_source":"owm","aliases":{"en":["Warda"],"mr":["वर्धा"],"hi":["वर्धा"]}},
+    {"name":"Washim","normalized_name":"washim","headquarters":"Washim","state":"Maharashtra","country":"IN","latitude":20.1029211,"longitude":77.1353872,"coordinate_source":"owm","aliases":{"en":["Vashim"],"mr":["वाशिम"],"hi":["वाशिम"]}},
+    {"name":"Yavatmal","normalized_name":"yavatmal","headquarters":"Yavatmal","state":"Maharashtra","country":"IN","latitude":20.390344,"longitude":78.1328518,"coordinate_source":"owm","aliases":{"en":["Yeotmal"],"mr":["यवतमाळ"],"hi":["यवतमाल"]}},
+    {"name":"Dharashiv","normalized_name":"dharashiv","headquarters":"Dharashiv","state":"Maharashtra","country":"IN","latitude":18.1853567,"longitude":76.0420253,"coordinate_source":"owm","aliases":{"en":["Osmanabad"],"mr":["धाराशिव","उस्मानाबाद"],"hi":["धाराशिव","उस्मानाबाद"]}}
+  ]
+}

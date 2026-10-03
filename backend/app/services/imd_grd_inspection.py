@@ -1,8 +1,8 @@
 """Read-only structural validation for annual IMD 1-degree temperature GRDs.
 
-This module intentionally does not decode values. IMD's public examples specify
-4-byte C/Fortran floats and the grid, but do not specify byte order or explicitly
-tie the sample's I/J indices to the geographic axes.
+This module intentionally does not decode values. IMD documentation establishes
+four bytes per grid value and the logical grid, but does not establish the
+external numeric representation, byte order, or raw I/J geographic mapping.
 """
 from __future__ import annotations
 
@@ -59,7 +59,7 @@ def inspect_imd_temperature_grd(path: str | Path) -> dict[str, Any]:
         "size_matches_documented_layout": size == expected_size,
         "expected_daily_records": records, "record_bytes": record_bytes,
         "grid_dimensions": [GRID_ROWS, GRID_COLUMNS], "bytes_per_value": BYTES_PER_VALUE,
-        "float32_width_supported_by_documented_record": True,
+        "four_byte_value_width_documented": True,
         "byte_order": "UNVERIFIED", "ieee_754_representation": "UNVERIFIED",
         "date_mapping": "Daily sequential records; official sample descriptor starts 1 Jan at 1-day increments; exact per-file payload was not decoded.",
         "record_1_date_by_archive_convention": f"{year:04d}-01-01",

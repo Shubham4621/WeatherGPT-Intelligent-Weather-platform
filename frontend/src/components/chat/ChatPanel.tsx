@@ -40,7 +40,7 @@ export default function ChatPanel() {
       const response = await sendChatMessage(content, language);
       setMessages((previous) => [...previous, { id: nextId.current++, role: 'assistant', content: response.message, response }]);
     } catch (requestError) {
-      const message = requestError instanceof ChatApiError ? requestError.message : 'WeatherGPT could not complete that request. Please try again.';
+      const message = requestError instanceof ChatApiError ? requestError.message : t(language, 'WeatherGPT could not complete that request. Please try again.');
       setError(message);
     } finally {
       setLoading(false);

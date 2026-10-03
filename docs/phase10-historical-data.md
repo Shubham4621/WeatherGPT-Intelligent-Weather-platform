@@ -6,7 +6,7 @@ Inspection was performed on the raw files in place. No raw file was modified, re
 
 There are 40 data files: 13 rainfall NetCDF files (330,822,852 bytes total), 11 maximum-temperature GRD files, and 16 minimum-temperature GRD files (temperature total: 37,909,528 bytes). The temperature file count is 27. Directory totals are 368,732,380 bytes.
 
-All rainfall files have NetCDF classic/CDF-1 signature (`CDF\\x01`) and embedded dimensions/time coordinates. The temperature files are `.GRD` binary. Their sizes align exactly with the IMD-published 31×31 float32 daily-record size for the year named by each file; values were not decoded because byte order is not specified in the official reading examples.
+All rainfall files have NetCDF classic/CDF-1 signature (`CDF\\x01`) and embedded dimensions/time coordinates. The temperature files are `.GRD` binary. Their sizes match the expected annual count of 31×31 records with four bytes per value. This structural match does not establish IEEE-754 or another external numeric representation, byte order, raw I/J orientation, or payload validity; values were not decoded.
 
 ## 2. Rainfall dataset
 
@@ -50,7 +50,7 @@ Product inferred from the exact `Maxtemp_MaxT_YYYY.GRD` names and the official I
 | `Maxtemp_MaxT_2023.GRD` | 1,403,060 | 2023 / 365 |
 | `Maxtemp_MaxT_2024.GRD` | 1,406,904 | 2024 / 366 |
 
-The file sizes equal precisely the official expected number of float32 grid records for those years (including leap days). This supports the documented layout and indicates no additional header bytes, but does not prove byte order or validate the values. Tmax values were not decoded.
+The file sizes match the arithmetic for 365 or 366 annual records of 31×31 four-byte values. This is a structural length check only; it does not establish the external numeric representation, byte order, raw I/J orientation, or payload validity. Tmax values were not decoded.
 
 ## 4. Tmin dataset
 
@@ -75,7 +75,7 @@ Product inferred from the exact `Mintemp_MinT_YYYY.GRD` names and the official I
 | `Mintemp_MinT_2024.GRD` | 1,406,904 | 2024 / 366 |
 | `Mintemp_MinT_2025.GRD` | 1,403,060 | 2025 / 365 |
 
-Sizes exactly match official-layout daily float32 records for the filename year. This is a structural consistency check, not a value decode. The 2010–2013 files predate the official page's stated 1951–2024 span, and the 2025 file extends beyond it; verify those files' download provenance/version before treating their contents as part of this official product.
+Sizes match the expected number of daily records at four bytes per grid value for the filename year. This is a structural consistency check and does not prove float representation, byte order, orientation, or value validity. The 2010–2013 files predate the official page's stated 1951–2024 span, and the 2025 file extends beyond it; verify those files' download provenance/version before treating their contents as part of this official product.
 
 ## 5. Date coverage
 

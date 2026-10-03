@@ -1,0 +1,26 @@
+{
+  "stations": [
+    {
+      "station_id": "42921",
+      "station_name": "Nashik",
+      "district": "Nashik",
+      "state": "Maharashtra",
+      "country": "IN",
+      "latitude": 20.0333333333,
+      "longitude": 73.7833333333,
+      "coordinate_precision": "20°02'N, 73°47'E as supplied; degree-minute precision",
+      "elevation_m": 598.76,
+      "source": "IMD Data Service Portal",
+      "datasets": {
+        "daily": {
+          "name": "SURFACE_TABLE_2_DAY_SUMMARY",
+          "path": "data/raw/dhule_station/42921_Table_2_Daily_NDCQ-2026-09-317.csv"
+        },
+        "synoptic": {
+          "name": "SURFACE_TABLE_3_SYNOPTIC_HOUR",
+          "path": "data/raw/dhule_station/42921_Table_3_Daily_NDCQ-2026-09-317.csv"
+        }
+      }
+    }
+  ]
+}
